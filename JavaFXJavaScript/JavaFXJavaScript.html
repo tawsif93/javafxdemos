@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>JavaFXJavaScript</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    
+    function show_alert() {
+        alert("JS: I am an alert box!");
+    }
+
+    function show_message(message) {
+        alert("JS: Message: \"" + message + "\"");
+    }
+    
+    function show_confirm() {
+        return confirm("JS: Press a button");
+    }
+    
+    function show_prompt() {
+        var name = prompt("JS: Please enter your name", "Rakesh Menon");
+        if (name == null) {
+            return ""
+        } else {
+            return name;
+        }
+    }
+    
+    function showAlert() {
+        var applet = document.getElementById('JavaFXJavaScript');
+        applet.script.showAlert();
+    }
+
+    function showMessage(message) {
+        var applet = document.getElementById('JavaFXJavaScript');
+        applet.script.showMessage(message);
+    }
+
+    function showConfirm() {
+        var applet = document.getElementById('JavaFXJavaScript');
+        var option = applet.script.showConfirm();
+        if(option == 0) {
+            alert("JS: You pressed \"OK\"");
+        } else {
+            alert("JS: You pressed \"Cancel\"");
+        }
+    }
+
+    function showPrompt() {
+        var applet = document.getElementById('JavaFXJavaScript');
+        var message = applet.script.showPrompt();
+        document.InputForm.PromptMessage.value = message;
+    }
+
+</script>
+
+<table cellpadding="10" cellspacing="0" border="1">
+<tr>
+    <td align="center" valign="center"><font size="+1"><b>HTML</b></font></td>
+</tr>
+<tr><td>
+
+<form name="InputForm">
+<table cellpadding="0" cellspacing="10" border="0">
+    <tr>
+        <td><input type="button" value="Alert" onclick="javascript:showAlert();"></td>
+        <td><input type="button" value="Confirm" onclick="javascript:showConfirm();"/></td>
+    </tr>
+    <tr>
+        <td><input type="text" value="JavaScript <-> Java" name="message"/></td>
+        <td><input type="button" value="Message" onclick="javascript:showMessage(message.value);"/></td>
+    </tr>
+    <tr>
+        <td><input type="text" value="" name="PromptMessage"/></td>
+        <td><input type="button" value="Prompt" onclick="javascript:showPrompt();"/></td>
+    </tr>
+</table>
+</form>
+
+</td></tr>
+<tr>
+    <td align="center" valign="center"><font size="+1"><b>JavaFX</b></font></td>
+</tr>
+<tr><td>
+
+<table cellpadding="0" cellspacing="10" border="0"><tr><td valign="center">
+    
+<script src="http://dl.javafx.com/1.2/dtfx.js"></script>
+<script>
+    javafx(
+       {
+           archive: "dist/JavaFXJavaScript.jar",
+           draggable: true,
+           width: 250,
+           height: 120,
+           code: "javafxjavascript.Main",
+           name: "JavaFXJavaScript",
+           id: 'JavaFXJavaScript'
+       }
+    );
+</script>
+
+</td></tr></table>
+</td></tr></table>
+
+</body>
+</html>
