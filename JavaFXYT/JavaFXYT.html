@@ -1,0 +1,54 @@
+<html>
+
+  <head>
+    <script src="http://www.google.com/jsapi"></script>
+    <script>
+        google.load("swfobject", "2.1");
+    </script>    
+    <script type="text/javascript" src="JavaYT.js"></script>
+  </head>
+
+<body>
+
+    <script type="text/javascript">
+        var params = { allowScriptAccess: "always", bgcolor: "#000000" };
+        var atts = { id: "jfxytplayer" };
+        swfobject.embedSWF("http://www.youtube.com/apiplayer?enablejsapi=1&playerapiid=ytplayer", 
+                       "ytapiplayer", "340", "250", "8", null, null, params, atts);
+    </script>
+    
+    <table cellpadding="30" cellspacing="0" border="0" background="bgimage.jpg" width="423" height="528">
+        <tr><td>
+        <table cellpadding="0" cellspacing="0" border="0" bgcolor="#000000">
+        <tr>
+            <td width="354" height="250" align="center" valign="top">
+                <div id="ytapiplayer" align="center">
+                    You need Flash player 8+ and JavaScript enabled to view this video.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="354" height="203" align="center" valign="top">
+                <script src="http://dl.javafx.com/1.2/dtfx.js"></script>
+                <script>
+                    javafx( 
+                    {
+                        archive: "JavaFXYT.jar",
+                        draggable: false,
+                        width: 354,
+                        height: 203,
+                        code: "javafxyt.Main",
+                        name: "JavaFXYT",
+                        loading_image_url: "http://blogs.sun.com/rakeshmenonp/resource/JavaFXYT/JavaFXYT_app.jpg",
+                        loading_image_width: "354",
+                        loading_image_height: "203"
+                    }
+                    );
+                </script>
+            </td>
+        </tr>
+    </table>
+    </td></tr>
+    </table>
+</body>
+</html>
