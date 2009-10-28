@@ -38,15 +38,14 @@ var group = Group {
 }
 
 function onMouseReleased(me : MouseEvent) : Void {
-
+    
     for(nz in nodes) {
-        if(nz.zOrder == 0) {
-            nz.zOrder = (me.node as NodeZ).zOrder;
-            // Bring node to top
-            (me.node as NodeZ).zOrder = 0;
+        nz.zOrder++;
+        if(me.node == nz) {
+            nz.zOrder = 0;
         }
     }
-    
+
     group.content = Sequences.sort(nodes) as Node[];
 }
 
