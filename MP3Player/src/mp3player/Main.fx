@@ -54,8 +54,11 @@ import javafx.stage.StageStyle;
 import javafx.data.feed.rss.Channel;
 import javafx.data.feed.rss.Item;
 import javafx.data.feed.rss.RssTask;
-
 import javafx.scene.layout.VBox;
+import javafx.io.http.URLConverter;
+import javafx.ext.swing.SwingTextField;
+
+import javafx.scene.text.TextOrigin;
 
 var stage:Stage;
 
@@ -66,43 +69,70 @@ var dragTextVisible = bind inBrowser and draggable and dragRect.hover;
 
 var homePage = "http://javafx.com/samples/DraggableMP3Player/index.html";
 
-def playlist = Playlist {  };
-var rssTask = RssTask {
+var artist = Text {
+    translateY: 45
+    translateX: 170
+    font: Font { size: 12 }
+    content: "Artist: "
+    textOrigin: TextOrigin.TOP
+}
 
-    location: "http://developer.echonest.com/artist/Modest+Mouse/audio.rss"
-    interval: 1h
-
-    onChannel: function(channel : Channel) {
-        playlist.clear();
-    }
-
-    /**
-    * <item>
-    * <title>Trailer Trash</title>
-    * <link>http://media.libsyn.com/media/mikewentwest/08_Trailer_Trash.mp3</link>
-    * <description>Trailer Trash by Modest Mouse, found at http://www.mikewentwest.com</description>
-    * <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gathered by The Echo Nest</dc:creator>
-    * <pubDate>Wed, 14 Oct 2009 04:33:00 +0000</pubDate>
-    * <guid>http://media.libsyn.com/media/mikewentwest/08_Trailer_Trash.mp3</guid>
-    * <enclosure url="http://media.libsyn.com/media/mikewentwest/08_Trailer_Trash.mp3" length="349" type="audio/mpeg"></enclosure>
-    * </item>
-    */
-    onItem: function(item : Item) {
-        playlist.add(Song {
-            title: item.title
-            link: item.link
-            description: item.description
-            pubDate: item.pubDate
-            guid: item.guid.text
-        });
-    }
-
-    onDone: function() {
-        updatePlayList();
-        playlist.currentSong = 0;
+var artistText : SwingTextField = SwingTextField {
+    text: "Michael Jackson"
+    translateY: 42
+    translateX: 175 + artist.layoutBounds.width
+    width: 360 - artist.layoutBounds.width + 5
+    borderless: true
+    action: function() {
+        startRssTask();
     }
 }
-rssTask.start();
+
+def playlist = Playlist {  };
+var rssTask : RssTask;
+
+function startRssTask() : Void {
+
+    rssTask.stop();
+    stopCurrentSong();
+    
+    rssTask = RssTask {
+
+        location: "http://developer.echonest.com/artist/{URLConverter{ }.encodeString(artistText.text)}/audio.rss"
+        interval: 1h
+
+        onChannel: function(channel : Channel) {
+            playlist.clear();
+        }
+
+        /**
+         * <item>
+         * <title>Trailer Trash</title>
+         * <link>http://media.libsyn.com/media/mikewentwest/08_Trailer_Trash.mp3</link>
+         * <description>Trailer Trash by Modest Mouse, found at http://www.mikewentwest.com</description>
+         * <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gathered by The Echo Nest</dc:creator>
+         * <pubDate>Wed, 14 Oct 2009 04:33:00 +0000</pubDate>
+         * <guid>http://media.libsyn.com/media/mikewentwest/08_Trailer_Trash.mp3</guid>
+         * <enclosure url="http://media.libsyn.com/media/mikewentwest/08_Trailer_Trash.mp3" length="349" type="audio/mpeg"></enclosure>
+         * </item>
+         */
+        onItem: function(item : Item) {
+            playlist.add(Song {
+                title: trimString(item.title, 40)
+                link: item.link
+                description: trimString(item.description, 70)
+                pubDate: item.pubDate
+                guid: item.guid.text
+            });
+        }
+
+        onDone: function() {
+            updatePlayList();
+            playlist.currentSong = 0;
+        }
+    }
+    rssTask.start();
+}
 
 function stopCurrentSong():Void {
     mediaPlayer.stop();
@@ -642,7 +672,8 @@ stage = Stage {
                 total_time,
                 // drag controls
                 dragRect,
-                can_drag_me_text,
+                artist,
+                artistText,
                 drag_closers,
                 //volume control,
                 volume_group_wrapper,
@@ -671,3 +702,17 @@ stage = Stage {
         }
     ]
 }
+
+// Trim the string if length is greater than specified length
+function trimString(string:String, length:Integer) : String {
+
+    if(string == null) return "";
+
+    if(string.length() > length) {
+        return "{string.substring(0, length).trim()}...";
+    } else {
+        return string;
+    }
+}
+
+startRssTask();
