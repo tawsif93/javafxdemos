@@ -2,8 +2,8 @@
 <!-- You may freely edit this file. See commented blocks below for -->
 <!-- some examples of how to customize the build. -->
 <!-- (If you delete it and reopen the project it will be recreated.) -->
-<project name="DraggableMP3Player" default="default" basedir=".">
-    <description>Builds, tests, and runs the project DraggableMP3Player.</description>
+<project name="MP3Player" default="default" basedir=".">
+    <description>Builds, tests, and runs the project MP3Player.</description>
     <import file="nbproject/build-impl.xml"/>
     <!-- 
        The following part allows you to run the sample out of NetBeans IDE. It will
@@ -76,7 +76,7 @@
 
     An example of overriding the target for project execution could look like this:
 
-        <target name="run" depends="DraggableMP3Player-impl.jar">
+        <target name="run" depends="MP3Player-impl.jar">
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>

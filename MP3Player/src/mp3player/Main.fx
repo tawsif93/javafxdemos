@@ -35,7 +35,6 @@ import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -56,18 +55,58 @@ import javafx.data.feed.rss.Item;
 import javafx.data.feed.rss.RssTask;
 import javafx.scene.layout.VBox;
 import javafx.io.http.URLConverter;
-import javafx.ext.swing.SwingTextField;
-
 import javafx.scene.text.TextOrigin;
+import javafx.ext.swing.SwingComponent;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import javafx.io.Storage;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 var stage:Stage;
 
 var isApplet = "true".equals(FX.getArgument("isApplet") as String);
 var inBrowser = isApplet;
 var draggable = AppletStageExtension.appletDragSupported;
-var dragTextVisible = bind inBrowser and draggable and dragRect.hover;
 
 var homePage = "http://javafx.com/samples/DraggableMP3Player/index.html";
+
+/**
+ * JavaFX-Storage: Save last searched artist name
+ */
+function store(artist : String) : Void {
+
+    try {
+        
+        var entry = Storage {
+            source: "MP3Player.dat"
+        };
+        var out = entry.resource.openOutputStream(true);
+        out.write(artist.getBytes());
+        out.close();
+        
+    } catch (e : java.lang.Exception) { }
+}
+
+function load() : String {
+
+    var artist = "Michael Jackson";
+
+    try {
+        
+        var entry = Storage {
+            source: "MP3Player.dat"
+        };
+        var in = entry.resource.openInputStream();
+        var reader = new BufferedReader(new InputStreamReader(in));
+        var line = reader.readLine();
+        if(line != null) { artist = line; }
+        in.close();
+        
+    } catch (e : java.lang.Exception) { }
+
+    return artist;
+}
 
 var artist = Text {
     translateY: 45
@@ -77,16 +116,19 @@ var artist = Text {
     textOrigin: TextOrigin.TOP
 }
 
-var artistText : SwingTextField = SwingTextField {
-    text: "Michael Jackson"
-    translateY: 42
-    translateX: 175 + artist.layoutBounds.width
-    width: 360 - artist.layoutBounds.width + 5
-    borderless: true
-    action: function() {
+var defaultArtist = load();
+var artistTextField = new JTextField(defaultArtist);
+artistTextField.setBorder(null);
+artistTextField.setBackground(new java.awt.Color(0,0,0,0));
+artistTextField.addActionListener(ActionListener {
+    override function actionPerformed(ae) {
         startRssTask();
     }
-}
+});
+var artistText = SwingComponent.wrap(artistTextField);
+artistText.translateY = 42;
+artistText.translateX = 175 + artist.layoutBounds.width;
+artistText.width = 360 - artist.layoutBounds.width;
 
 def playlist = Playlist {  };
 var rssTask : RssTask;
@@ -95,10 +137,11 @@ function startRssTask() : Void {
 
     rssTask.stop();
     stopCurrentSong();
+    store(artistTextField.getText());
     
     rssTask = RssTask {
 
-        location: "http://developer.echonest.com/artist/{URLConverter{ }.encodeString(artistText.text)}/audio.rss"
+        location: "http://developer.echonest.com/artist/{URLConverter{ }.encodeString(artistTextField.getText())}/audio.rss"
         interval: 1h
 
         onChannel: function(channel : Channel) {
@@ -378,40 +421,23 @@ var play_rollover:ImageView = ImageView { id: "play_rollover"
     }
 };
 
-var drag_opacity = 0.0;
 var drag_close_rollover = Image { url: "{__DIR__}images/close_rollover.png" };
 var drag_close_normal = Image { url: "{__DIR__}images/close.png" };
 var drag_out_rollover = Image { url: "{__DIR__}images/dragOut_rollover.png" };
 var drag_out_normal = Image { url: "{__DIR__}images/dragOut.png" };
 
 var drag_closers = Group {
-    opacity: bind drag_opacity;
     content:[ 
-        ImageView { x: 541 y: 44 image: drag_close_normal  visible: bind not inBrowser },
-        ImageView { x: 541 y: 44 image: drag_out_normal  visible: bind inBrowser and draggable  },
-        Rectangle { x: 541 y: 44 width: 10 height: 10 fill: Color.TRANSPARENT
+        ImageView { x: 551 y: 48 image: drag_close_normal  visible: bind not inBrowser },
+        ImageView { x: 551 y: 48 image: drag_out_normal  visible: bind inBrowser and draggable  },
+        Rectangle { x: 551 y: 48 width: 10 height: 10 fill: Color.TRANSPARENT
             onMouseClicked: function(e:MouseEvent):Void { stage.close(); }
         }
     ]
     };
 
-var dragAreaFader = Timeline {
-    keyFrames: [
-        at (0s)   { drag_opacity => 0.0 },
-        at (0.2s) { drag_opacity => 1.0 },
-    ]
-};
-
 var dragRect:Rectangle = Rectangle {
     x: 155 y: 30 width: 420 height: 40 fill: Color.TRANSPARENT
-    onMouseEntered: function(e) {
-        dragAreaFader.rate = 1.0;
-        dragAreaFader.play();
-    }
-    onMouseExited: function(e) {
-        dragAreaFader.rate = -1.0;
-        dragAreaFader.play();
-    }
 };
 
 var stageDragInitialX:Number;
@@ -419,7 +445,6 @@ var stageDragInitialY:Number;
 
 var can_drag_me: ImageView = ImageView {
     id: "can_drag_me"
-    opacity: bind drag_opacity
     visible: true
     x: 83
     y: 29
@@ -434,18 +459,6 @@ var can_drag_me: ImageView = ImageView {
         stage.y = e.screenY - stageDragInitialY;
     }
 };
-
-var can_drag_me_text:Text = Text { content: "You can drag me out of the browser"
-    fill: Color.WHITE
-    font: Font { size: 12 embolden: true name: "Arial"}
-    effect: DropShadow { offsetX: 0 offsetY: 1 color:Color.BLACK spread: 0.5 radius: 14} 
-    opacity: bind drag_opacity
-    visible: bind dragTextVisible
-    y: 60
-    x: 165
-};
-
-
 
 // the time control slider
 var time_control_length = 240.0;
@@ -644,10 +657,10 @@ var songInfo = Group {
 stage = Stage {
     title: "MP3 Player"
     visible: true
-    width: 510
-    height: 345
-    style:StageStyle.TRANSPARENT
+    style: StageStyle.TRANSPARENT
     scene: Scene {
+        width: 510
+        height: 345
         fill: bind if (inBrowser) Color.WHITE else Color.TRANSPARENT
         content: Group {
             translateX: -75
@@ -675,13 +688,13 @@ stage = Stage {
                 artist,
                 artistText,
                 drag_closers,
+                // text on the player itself
+                songInfo,
                 //volume control,
                 volume_group_wrapper,
                 ImageView { image: Image { url: "{__DIR__}images/MP3_handoff_volume_bkg.png" } x: 491 y: 130 },
                 volume_icon,
                 volume_rollover,
-                // text on the player itself
-                songInfo,
                 // the song info popup
                 song_info_popup,
             ]
