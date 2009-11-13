@@ -62,7 +62,6 @@ import java.awt.event.ActionListener;
 import javafx.io.Storage;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 import javafx.animation.KeyFrame;
 
 var stage:Stage;
@@ -178,8 +177,6 @@ function startRssTask() : Void {
     }
     rssTask.start();
 }
-
-var mediaPlayerPaused = true;
 
 function stopCurrentSong():Void {
     mediaPlayer.stop();
@@ -371,7 +368,6 @@ var playBack = ImageView { id: "playBack"
     image: Image { url: "{__DIR__}images/MP3_handoff_playBack.png" },
     onMousePressed: function(e) {
         var paused = mediaPlayer.paused;
-        mediaPlayerPaused = paused;
         if (not paused) {
             stopCurrentSong();
             playlist.currentSong--;
@@ -390,7 +386,6 @@ var playForward = ImageView { id: "playFoward"
     image: Image { url: "{__DIR__}images/MP3_handoff_playFoward.png" },
     onMousePressed: function(e) {
         var paused = mediaPlayer.paused;
-        mediaPlayerPaused = paused;
         if (not paused) {
             stopCurrentSong();
             playlist.currentSong++;
@@ -421,7 +416,7 @@ var pause_rollover_image = Image { url: "{__DIR__}images/pause_selected.png" };
 var play_rollover:ImageView = ImageView { id: "play_rollover"
     opacity: 1.0 visible: true
     x: 122 y: 114
-    image: bind if (not mediaPlayerPaused) {
+    image: bind if (not mediaPlayer.paused) {
         if (play_rollover.hover) { pause_rollover_image } else { pause_normal_image }
     } else {
         if (play_rollover.hover) { play_rollover_image } else { play_normal_image }
@@ -430,12 +425,9 @@ var play_rollover:ImageView = ImageView { id: "play_rollover"
         if (playlist.currentPlayingSong != playlist.songs[playlist.currentSong]) {
             stopCurrentSong();
             playCurrentSong();
-            mediaPlayerPaused = false;
         } else if (mediaPlayer.paused) {
-            mediaPlayerPaused = false;
             mediaPlayer.play();
         } else {
-            mediaPlayerPaused = true;
             mediaPlayer.pause();
         }
     }
