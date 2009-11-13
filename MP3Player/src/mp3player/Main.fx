@@ -63,6 +63,8 @@ import javafx.io.Storage;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import javafx.animation.KeyFrame;
+
 var stage:Stage;
 
 var isApplet = "true".equals(FX.getArgument("isApplet") as String);
@@ -177,6 +179,8 @@ function startRssTask() : Void {
     rssTask.start();
 }
 
+var mediaPlayerPaused = true;
+
 function stopCurrentSong():Void {
     mediaPlayer.stop();
     mediaPlayer.media = null;
@@ -186,9 +190,22 @@ function stopCurrentSong():Void {
 }
 
 function playCurrentSong():Void {
+
     playlist.currentPlayingSong = playlist.songs[playlist.currentSong];
-    mediaPlayer.media = playlist.currentPlayingSong.getMedia();
-    mediaPlayer.play();
+    var playTimeline = Timeline {
+        keyFrames: [ KeyFrame {
+            time: 1s
+            action: function() {
+                mediaPlayer.media = playlist.currentPlayingSong.getMedia();
+            }
+        }, KeyFrame {
+            time: 2s
+            action: function() {
+                mediaPlayer.play();
+            }
+        }]
+    };
+    playTimeline.play();
 }
 
 FX.addShutdownAction(function() { stopCurrentSong(); });
@@ -354,6 +371,7 @@ var playBack = ImageView { id: "playBack"
     image: Image { url: "{__DIR__}images/MP3_handoff_playBack.png" },
     onMousePressed: function(e) {
         var paused = mediaPlayer.paused;
+        mediaPlayerPaused = paused;
         if (not paused) {
             stopCurrentSong();
             playlist.currentSong--;
@@ -372,6 +390,7 @@ var playForward = ImageView { id: "playFoward"
     image: Image { url: "{__DIR__}images/MP3_handoff_playFoward.png" },
     onMousePressed: function(e) {
         var paused = mediaPlayer.paused;
+        mediaPlayerPaused = paused;
         if (not paused) {
             stopCurrentSong();
             playlist.currentSong++;
@@ -402,7 +421,7 @@ var pause_rollover_image = Image { url: "{__DIR__}images/pause_selected.png" };
 var play_rollover:ImageView = ImageView { id: "play_rollover"
     opacity: 1.0 visible: true
     x: 122 y: 114
-    image: bind if (not mediaPlayer.paused) {
+    image: bind if (not mediaPlayerPaused) {
         if (play_rollover.hover) { pause_rollover_image } else { pause_normal_image }
     } else {
         if (play_rollover.hover) { play_rollover_image } else { play_normal_image }
@@ -411,12 +430,13 @@ var play_rollover:ImageView = ImageView { id: "play_rollover"
         if (playlist.currentPlayingSong != playlist.songs[playlist.currentSong]) {
             stopCurrentSong();
             playCurrentSong();
+            mediaPlayerPaused = false;
+        } else if (mediaPlayer.paused) {
+            mediaPlayerPaused = false;
+            mediaPlayer.play();
         } else {
-            if (mediaPlayer.paused) {
-                mediaPlayer.play();
-            } else {
-                mediaPlayer.pause();
-            }
+            mediaPlayerPaused = true;
+            mediaPlayer.pause();
         }
     }
 };
