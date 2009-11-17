@@ -60,7 +60,7 @@ public class LightChoice extends CustomNode {
             content: [
                 distantLightButton, pointLightButton, spotLightButton
             ]
-            spacing: 5
+            spacing: 1
         }
     }
 

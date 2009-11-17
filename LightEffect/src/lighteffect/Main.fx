@@ -81,7 +81,7 @@ textArea.setEditable(false);
 textArea.setBorder(new EmptyBorder(5, 5, 5, 5));
 var fxTextArea = SwingComponent.wrap(textArea);
 fxTextArea.height = 250;
-fxTextArea.width = 458;
+fxTextArea.width = 470;
 var lightingCode = bind controlPanel.lightingCode on replace {
     textArea.setText(lightingCode);
 };
@@ -96,9 +96,9 @@ Stage {
     scene: Scene {
         content: [ effectNode, lightChoice, controlPanel, colorChooser, textAreaGroup ]
         fill: Color.BLACK
+        height: 840
+        width: 480
     }
     title: "Light Effect"
-    height: 840
-    width: 475
     resizable: false
 }

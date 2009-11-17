@@ -65,7 +65,7 @@ public class SliderControl extends CustomNode {
                     content: [
                         slider, valueLabel
                     ]
-                    spacing: 10
+                    spacing: 0
                 }
             ]
         }
