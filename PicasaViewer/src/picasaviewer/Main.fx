@@ -66,7 +66,7 @@ var fadeTransition = Timeline {
             }
         },
         KeyFrame {
-            time: 2s
+            time: 300ms
             values: [ x => 0 tween Interpolator.EASEBOTH ]
             canSkip: true
         },

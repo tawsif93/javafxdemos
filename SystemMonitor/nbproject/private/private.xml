@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/SystemMonitor.jnlp</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/SystemMonitor_browser.jnlp</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/DataParser.java</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/DataParserFactory.java</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/Main.fx</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/StreamReader.java</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/SystemMonitor.fx</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/TOPMonitor.java</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/linux/LinuxDataParser.java</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/mac/MacDataParser.java</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/solaris/SolarisDataParser.java</file>
+        <file>file:/Users/javafx/workspace/javafx/SystemMonitor/src/systemmonitor/solaris/SolarisMonitor.java</file>
+    </open-files>
+</project-private>

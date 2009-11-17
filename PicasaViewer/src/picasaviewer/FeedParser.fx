@@ -16,7 +16,7 @@ import java.io.InputStream;
 
 // Please update user-id ad album-id
 def userId = "<user-id>";
-def albumId = "<album-id>";
+def albumId = "5404549103144987569";
 def url = "http://picasaweb.google.com/data/feed/api/user/{userId}/albumid/{albumId}?imgmax=912";
 
 public class FeedParser {
