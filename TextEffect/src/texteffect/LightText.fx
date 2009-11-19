@@ -1,5 +1,5 @@
 /*
- * EmbossText.fx
+ * LightText.fx
  *
  * Created on 18 Nov, 2009, 11:41:52 AM
  */
