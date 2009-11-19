@@ -260,7 +260,7 @@ public class ControlPanel extends CustomNode {
         } else {
 
             lightCode = ""
-                "    light: PointLight \{\n"
+                "    light: SpotLight \{\n"
                 "        x: {pointX}\n"
                 "        y: {pointY}\n"
                 "        z: {pointZ}\n"
