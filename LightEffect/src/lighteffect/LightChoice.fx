@@ -9,11 +9,11 @@ package lighteffect;
 import javafx.ext.swing.SwingRadioButton;
 import javafx.ext.swing.SwingToggleGroup;
 import javafx.scene.CustomNode;
-import javafx.scene.layout.VBox;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.layout.HBox;
 
 /**
  * @author Rakesh Menon
@@ -21,7 +21,7 @@ import javafx.scene.text.FontWeight;
 
 public class LightChoice extends CustomNode {
 
-    var font = Font.font(null, FontWeight.BOLD, 12);
+    var font = Font.font("sansserif", FontWeight.REGULAR, 12);
 
     var toggleGroup = SwingToggleGroup {
     };
@@ -32,7 +32,7 @@ public class LightChoice extends CustomNode {
     var distantLightButton = SwingRadioButton {
         text: "DistantLight"
         font: font
-        foreground: Color.WHITE
+        foreground: Color.BLACK
         toggleGroup: toggleGroup
         selected: true
     }
@@ -40,14 +40,14 @@ public class LightChoice extends CustomNode {
     var pointLightButton = SwingRadioButton {
         text: "PointLight"
         font: font
-        foreground: Color.WHITE
+        foreground: Color.BLACK
         toggleGroup: toggleGroup
     }
 
     var spotLightButton = SwingRadioButton {
         text: "SpotLight"
         font: font
-        foreground: Color.WHITE
+        foreground: Color.BLACK
         toggleGroup: toggleGroup
     }
 
@@ -56,11 +56,11 @@ public class LightChoice extends CustomNode {
     public var spotLight = bind spotLightButton.selected;
 
     override function create() : Node {
-        VBox {
+        HBox {
             content: [
                 distantLightButton, pointLightButton, spotLightButton
             ]
-            spacing: 1
+            spacing: 5
         }
     }
 

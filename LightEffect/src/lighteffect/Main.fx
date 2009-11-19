@@ -8,66 +8,107 @@ package lighteffect;
 
 import javafx.ext.swing.SwingComponent;
 import javafx.scene.Group;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextArea;
+import lighteffect.ControlPanel;
+import lighteffect.LightChoice;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextOrigin;
-import javafx.stage.Stage;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextArea;
-import lighteffect.ColorChooser;
-import lighteffect.ControlPanel;
-import lighteffect.LightChoice;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Button;
+import colorpicker.ColorPicker;
 
-var colorChooser: ColorChooser = ColorChooser {
-    translateX: 10
-    translateY: bind controlPanel.boundsInLocal.height + 10
+var lightColor = Text {
+    translateY: 5
+    font: Font.font("sansserif", FontWeight.REGULAR, 12)
+    content: "Light Color"
+    textOrigin: TextOrigin.TOP
 };
 
-var lightChoice: LightChoice = LightChoice {
-    translateY: bind effectNode.boundsInLocal.height + 30
-    translateX: 10
+var colorPicker : ColorPicker = ColorPicker {
+    color: Color.WHITE
+    blocksMouse: true
+};
+
+var colorBox = HBox {
+    layoutX: 30
+    layoutY: bind effectNode.layoutBounds.height + 30
+    spacing: 5
+    content: [ lightColor, colorPicker ]
+    visible: bind controls.visible
 }
 
+var lightChoice: LightChoice = LightChoice {
+    translateX: 150
+    translateY: 10
+}
 var controlPanel: ControlPanel = ControlPanel {
-    translateX: 250
-    color: bind colorChooser.color
-    colorDef: bind colorChooser.colorDef
+    color: bind colorPicker.color
+    colorDef: bind "{colorPicker.color}"
+    translateX: 20
 }
 lightChoice.updateLight = controlPanel.updateLight;
 
-var effectNode: Group = Group {
+var effectNode: HBox = HBox {
 
     var skyImage: ImageView;
 
+    spacing: 20
+
     content: [
-        skyImage = ImageView {
-            image: Image {
-                url: "{__DIR__}images/sky.jpg"
-            }
+        Group {
+            content: [
+                skyImage = ImageView {
+                    image: Image {
+                        url: "{__DIR__}images/sky.jpg"
+                        width: 200
+                        height: 200
+                    }
+                },
+                ImageView {
+                    image: Image {
+                        url: "{__DIR__}images/SwingingDuke.png"
+                        width: 200
+                        height: 200
+                    }
+                    effect: bind controlPanel.lighting
+                }
+            ]
         },
-        ImageView {
-            image: Image {
-                url: "{__DIR__}images/statue.png"
-            }
-            effect: bind controlPanel.lighting
-        },
-        Text {
-            textOrigin: TextOrigin.TOP
-            x: 10
-            y: 310
-            content: "LIGHT"
-            fill: bind controlPanel.lighting.light.color
-            font: Font.font(null, FontWeight.BOLD, 60);
-            effect: bind controlPanel.lighting
+        VBox {
+            spacing: 10
+            content: [
+                Text {
+                    textOrigin: TextOrigin.TOP
+                    x: 20
+                    y: 310
+                    content: "LIGHT"
+                    fill: bind controlPanel.lighting.light.color
+                    font: Font.font("sansserif", FontWeight.BOLD, 60);
+                    effect: bind controlPanel.lighting
+                },
+                Circle {
+                    fill: Color.TRANSPARENT
+                    stroke: Color.RED
+                    strokeWidth: 40
+                    radius: 40
+                    effect: bind controlPanel.lighting
+                }
+            ]
         }
     ]
 
-    translateX: 10
+    layoutX: 10
     translateY: 10
 
     onMousePressed: function(e) {
@@ -87,18 +128,45 @@ var lightingCode = bind controlPanel.lightingCode on replace {
 };
 
 var textAreaGroup = Group {
+    layoutX: 10
+    layoutY: bind effectNode.layoutBounds.height + 20
     content: [ fxTextArea ]
-    translateY: bind colorChooser.translateY + 85;
-    translateX: 5
+    visible: false
+}
+
+var controls = VBox {
+    layoutX: 10
+    layoutY: bind effectNode.layoutBounds.height + 20
+    content: [ lightChoice, controlPanel ]
+    spacing: 20
+    visible: bind not textAreaGroup.visible
+}
+
+var button : Button = Button {
+    layoutX: bind bgRect.width - button.layoutBounds.width - 10
+    layoutY: bind effectNode.layoutBounds.height - button.layoutBounds.height + 10
+    text: "View Source"
+    action: function() {
+        if(textAreaGroup.visible) {
+            button.text = "View Source"
+        } else {
+            button.text = "View Controls"
+        }
+        textAreaGroup.visible = not textAreaGroup.visible;
+    }
+}
+
+var bgRect = Rectangle {
+    width: bind effectNode.layoutBounds.width + 40
+    height: bind effectNode.layoutBounds.height + 20
 }
 
 Stage {
     scene: Scene {
-        content: [ effectNode, lightChoice, controlPanel, colorChooser, textAreaGroup ]
-        fill: Color.BLACK
-        height: 840
-        width: 480
+        content: [ bgRect, effectNode, controls, textAreaGroup, button, colorBox ]
+        fill: Color.WHITE
+        height: 680
+        width: 445
     }
     title: "Light Effect"
-    resizable: false
 }

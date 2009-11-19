@@ -10,11 +10,11 @@ import javafx.ext.swing.SwingLabel;
 import javafx.ext.swing.SwingSlider;
 import javafx.scene.CustomNode;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.layout.LayoutInfo;
 
 /**
  * @author Rakesh Menon
@@ -27,17 +27,16 @@ public class SliderControl extends CustomNode {
     public var minimum = 0;
     public var scaleFactor = 1.0;
 
-    var font = Font.font(null, FontWeight.BOLD, 12);
+    var font = Font.font("sansserif", FontWeight.REGULAR, 12);
 
     public var titleLabel = SwingLabel {
-        translateY: 3
         text: bind title
-        foreground: Color.WHITE
+        foreground: Color.BLACK
         font: font
+        layoutInfo: LayoutInfo { width: 150 }
     }
 
     var slider = SwingSlider {
-        width: 100
         maximum: bind maximum
         minimum: bind minimum
         disable: bind disable
@@ -46,10 +45,8 @@ public class SliderControl extends CustomNode {
 
     public var valueLabel = SwingLabel {
         text: bind "{value}"
-        translateY: 3
-        foreground: Color.WHITE
+        foreground: Color.BLACK
         font: font
-        width: 50
     }
 
     public var default = 0.0 on replace {
@@ -58,16 +55,9 @@ public class SliderControl extends CustomNode {
     }
 
     override function create() : Node {
-        VBox {
-            content: [
-                titleLabel,
-                HBox {
-                    content: [
-                        slider, valueLabel
-                    ]
-                    spacing: 0
-                }
-            ]
+        HBox {
+            content: [ titleLabel, slider, valueLabel ]
+            spacing: 10
         }
     }
 }
