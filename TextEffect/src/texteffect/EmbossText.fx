@@ -1,18 +1,17 @@
 /*
  * EmbossText.fx
  *
- * Created on 18 Nov, 2009, 11:41:52 AM
+ * Created on 18 Nov, 2009, 10:36:42 AM
  */
 
 package texteffect;
 
-import javafx.scene.effect.Lighting;
-import javafx.scene.effect.light.SpotLight;
+import javafx.scene.CustomNode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextOrigin;
-import javafx.scene.CustomNode;
+import javafx.scene.Group;
 import javafx.scene.Node;
 
 /**
@@ -20,13 +19,15 @@ import javafx.scene.Node;
  */
 
 public class EmbossText extends CustomNode {
-    
+
     public var content : String;
     public var font: Font = Font { name: "sansserif" size: 20 };
     public var width = 300;
     public var height = 150;
     public var fill: Color = Color.GRAY;
-    
+    public var darkShadowFill: Color = Color.BLACK;
+    public var liteShadowFill: Color = Color.WHITE;
+
     def text : Text = Text {
         layoutX: bind (width - text.layoutBounds.width)/2.0
         layoutY: bind (height - text.layoutBounds.height)/2.0
@@ -34,24 +35,32 @@ public class EmbossText extends CustomNode {
         font: bind font
         fill: bind fill
         textOrigin: TextOrigin.TOP
-        effect: Lighting {
-            diffuseConstant: 2.0
-            specularConstant: 1.0
-            specularExponent: 20.0
-            surfaceScale: 2.9
-            light: SpotLight {
-                x: 58.0
-                y: 211.0
-                z: 100.0
-                pointsAtX: 100.0
-                pointsAtY: -311.0
-                pointsAtZ: -105.0
-                color: Color.WHITE
-            }
-        }
+        opacity: 0.5
+    }
+
+    def liteShadowText : Text = Text {
+        layoutX: bind (width - text.layoutBounds.width)/2.0
+        layoutY: bind (height - text.layoutBounds.height)/2.0 - 1
+        content: bind content
+        font: bind font
+        fill: bind liteShadowFill
+        textOrigin: TextOrigin.TOP
+        opacity: 0.5
+    }
+
+    def darkShadowText : Text = Text {
+        layoutX: bind (width - text.layoutBounds.width)/2.0
+        layoutY: bind (height - text.layoutBounds.height)/2.0 + 1
+        content: bind content
+        font: bind font
+        fill: bind darkShadowFill
+        textOrigin: TextOrigin.TOP
+        opacity: 0.5
     }
 
     override function create() : Node {
-        text;
+        Group {
+            content: [ darkShadowText, liteShadowText, text ]
+        }
     }
 }

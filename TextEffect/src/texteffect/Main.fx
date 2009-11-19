@@ -15,7 +15,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.text.FontWeight;
 import javafx.scene.control.TextBox;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.layout.HBox;
+import javafx.scene.control.ToggleGroup;
 
 
 /**
@@ -25,19 +27,29 @@ import javafx.scene.control.CheckBox;
 def width = 350;
 def height = 150;
 
-var checkbox = CheckBox {
-    layoutX: 10
-    layoutY: 10
-    text: "Emboss"
+var toggleGroup = ToggleGroup { };
+
+var engraveCheck = RadioButton {
+    text: "Engrave"
+    selected: true
+    toggleGroup: toggleGroup
 }
 
-var embossText = EmbossText {
-    content: bind textBox.rawText
-    font: Font.font("sansserif", FontWeight.BOLD, 45)
-    fill: Color.GRAY
-    width: width
-    height: height - 30
-    visible: bind checkbox.selected
+var embossCheck = RadioButton {
+    text: "Emboss"
+    toggleGroup: toggleGroup
+}
+
+var lightCheck = RadioButton {
+    text: "Light"
+    toggleGroup: toggleGroup
+}
+
+var RadioButton = HBox {
+    layoutX: 10
+    layoutY: 10
+    content: [ engraveCheck, embossCheck, lightCheck ]
+    spacing: 10
 }
 
 var engraveText = EngraveText {
@@ -47,8 +59,26 @@ var engraveText = EngraveText {
     darkShadowFill: Color.BLACK
     liteShadowFill: Color.WHITE
     width: width
-    height: height - 30
-    visible: bind not checkbox.selected
+    height: height - 10
+    visible: bind engraveCheck.selected
+}
+
+var embossText = EmbossText {
+    content: bind textBox.rawText
+    font: Font.font("sansserif", FontWeight.BOLD, 45)
+    fill: Color.GRAY
+    width: width
+    height: height - 10
+    visible: bind embossCheck.selected
+}
+
+var lightText = LightText {
+    content: bind textBox.rawText
+    font: Font.font("sansserif", FontWeight.BOLD, 45)
+    fill: Color.GRAY
+    width: width
+    height: height - 10
+    visible: bind lightCheck.selected
 }
 
 var textBox: TextBox = TextBox {
@@ -73,7 +103,9 @@ var bgRect = Rectangle {
 Stage {
     title: "Text Effect"
     scene: Scene {
-        content: [ bgRect, embossText, engraveText, textBox, checkbox ]
+        content: [ bgRect, embossText, engraveText, lightText, textBox, RadioButton ]
+        width: 350
+        height: 150
     }
     resizable: false
 }
