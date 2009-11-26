@@ -35,26 +35,24 @@ package combobox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import javafx.scene.shape.ClosePath;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.Group;
 import javafx.scene.control.ListView;
-import javafx.scene.shape.Line;
 import javafx.scene.control.Skin;
 import javafx.scene.input.KeyCode;
-import javafx.scene.control.Label;
 import javafx.scene.layout.LayoutInfo;
-import javafx.scene.layout.HBox;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
 import javafx.scene.control.Behavior;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Resizable;
+import javafx.geometry.VPos;
+import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.shape.Polygon;
+import javafx.scene.layout.Panel;
 
 
 /**
@@ -63,22 +61,36 @@ import javafx.scene.input.KeyEvent;
 
 public class ComboBoxSkin extends Skin {
 
-    var buttonTop = "#62778a";
-    var buttonBottom = "#253a4d";
-    var buttonFillTop = "#f6f8fa";
-    var buttonFillCenter = "#a8bcce";
-    var buttonFillBottom = "#bbd0e3";
-    var borderTop = "#95989E";
-    var borderBottom = "#585B61";
-    var textBG = "#dddfe5";
-    var focusBorder = "#0093ff";
+    public var font = Font { name: "sansserif" size: 12 };
+
+    /**
+     * Theme
+     */
+    def baseFill = "#d0d0d0";
+    def focusBorderFill = "#0093ff";
+    def darkShadowFill = "#858585";
+    def liteShadowFill = "#f6f6f6";
+    def topFill = "#e0e0e0";
+    def bottomFill = "#a9a9a9";
+    def arrowFill = "#3f3f3f";
+    
+    /**
+     * Layout
+     */
+    def cornerRadius = 7;
+    def paddingLeft = 10;
+    def paddingTop = 4;
+    def paddingBottom = 6;
+    def paddingRight = 10;
+    def paddingText = 2;
+    def focusSize = 1;
+    def buttonWidth = 20.0;
 
     override var behavior = ComboBoxBehavior { };
-    
-    var buttonWidth = 20.0;
 
+    var animate = true;
     var listY = 0.0;
-
+    
     var timeline : Timeline = Timeline {
 
         keyFrames: [
@@ -101,21 +113,31 @@ public class ComboBoxSkin extends Skin {
             }
         ]
     };
-
+    
     public var showPopup = false on replace {
 
         if(showPopup) {
-            timeline.rate = 1;
-            timeline.playFromStart();
+            
+            if(animate) {
+                timeline.rate = 1;
+                timeline.playFromStart();
+            } else {
+                listY = (node.localToScene(node.layoutBounds).maxY) + 2;
+            }
+            
             list.visible = true;
             listView.requestFocus();
+            
         } else if(timeline.running) {
             timeline.stop();
             listY = (node.localToScene(node.layoutBounds).maxY) - 120;
-        } else {
+        } else if(animate) {
             timeline.rate = -1;
             timeline.time = 200ms;
             timeline.play();
+        } else {
+            list.visible = false;
+            listY = (node.localToScene(node.layoutBounds).maxY) - 120;
         }
     }
 
@@ -131,23 +153,13 @@ public class ComboBoxSkin extends Skin {
         }
 
         layoutInfo: LayoutInfo {
-            width: bind control.width - 10
+            width: bind control.width - 4
             height: 120
         }
     };
 
-    public-read var list : HBox = HBox {
-        visible: false
-        content: [ listView ]
-        blocksMouse: true
-        clip: bind Rectangle {
-            x: -2
-            y: bind node.localToScene(node.layoutBounds).maxY
-            width: bind control.width + 4
-            height: 124
-        }
-    };
-    
+    public-read var list : Panel;
+
     var listViewFocus = bind listView.focused on replace {
         if(not listViewFocus) {
             showPopup = false;
@@ -159,146 +171,114 @@ public class ComboBoxSkin extends Skin {
             delete list from list.scene.content;
         }
     }
+
+    var arrow : Node;
+    var label : Label;    
     
-    var text : Label = Label {
-        font : Font { size : 12 }
-        text: bind "{listView.selectedItem}"
-        width: bind control.width - buttonWidth - 8
-        layoutX: 8
-        layoutY: bind (control.height - text.layoutBounds.height)/2.0
-    }
-    
-    var buttonBGRect : Rectangle = Rectangle {
-
-        x: bind borderBGRect.width - buttonWidth + 2
-        y: 2
-        width: buttonWidth
-        height: bind borderBGRect.height
-
-        arcWidth: 10
-        arcHeight: 10
-
-        fill: LinearGradient {
-            startX: 0.0, startY: 0.0, endX: 0.0, endY: 1.0
-            proportional: true
-            stops: [
-                Stop { offset: 0.0 color: Color.web(buttonFillTop) },
-                Stop { offset: 0.3 color: Color.web(buttonFillCenter) },
-                Stop { offset: 0.7 color: Color.web(buttonFillBottom) }
-            ]
-        }
-
-        strokeWidth: 1.5
-        stroke: LinearGradient {
-            startX: 0.0, startY: 0.0, endX: 0.0, endY: 1.0
-            proportional: true
-            stops: [
-                Stop { offset: 0.0 color: Color.web(buttonTop) },
-                Stop { offset: 1.0 color: Color.web(buttonBottom) }
-            ]
-        }
-
-        clip: Rectangle {
-            x: bind buttonBGRect.x + 3
-            y: 2
-            width: bind buttonWidth
-            height: bind buttonBGRect.height
-        }
-    }
-
-    var borderLine = Line {
-        startX: bind buttonBGRect.x + 3
-        startY: 2
-        endX: bind buttonBGRect.x + 3
-        endY: bind buttonBGRect.height
-        strokeWidth: 1.5
-        stroke: bind buttonBGRect.stroke
-    }
-
-    var borderBGRect = Rectangle {
-
-        x: 2
-        y: 2
-        width: bind control.width - 4
-        height: bind control.height - 4
-        arcWidth: 10
-        arcHeight: 10
-
-        strokeWidth: 1.5
-        stroke: LinearGradient {
-            startX: 0.0, startY: 0.0, endX: 0.0, endY: 1.0
-            proportional: true
-            stops: [
-                Stop { offset: 0.0 color: Color.web(borderTop) },
-                Stop { offset: 1.0 color: Color.web(borderBottom) }
-            ]
-        }
-
-        fill: LinearGradient {
-            startX: 0.0, startY: 0.0, endX: 0.0, endY: 1.0
-            proportional: true
-            stops: [
-                Stop { offset: 0.0 color: Color.WHITE },
-                Stop { offset: 0.3 color: Color.web(textBG) },
-                Stop { offset: 0.7 color: Color.WHITE }
-            ]
-        }
-    }
-
-    var focusBorderColor = Color.web(focusBorder);
-    var focusRect = Rectangle {
-        width: bind control.width
-        height: bind control.height
-        arcWidth: 10
-        arcHeight: 10
-        fill: bind if(control.focused or listView.focused) {
-            focusBorderColor
-        } else {
-            Color.TRANSPARENT
-        }
-    }
-
-    var arrow : Path = Path {
-
-        layoutX: bind buttonBGRect.x + 6
-        layoutY: bind (control.height - arrow.layoutBounds.height)/2.0 + 2
-
-        elements: [
-            MoveTo { x: 0.0 y: 0.0 },
-            LineTo { x: bind (buttonBGRect.width - 10) y: 0.0 },
-            LineTo { x: bind (buttonBGRect.width - 10)/2.0 y: 6 },
-            ClosePath { }
-        ]
-
-        strokeWidth: 1.0
-        fill: Color.BLACK
-        stroke: Color.web("#9B9B9B")
-    };
-
-    override function intersects(x, y, w, h) : Boolean {
-        return node.intersects(x, y, w, h);
-    }
-
-    override function contains(x, y) : Boolean {
-        return node.contains(x, y);
-    }
-
     init {
+
+        if("{__PROFILE__}" == "mobile") {
+            list = Panel {
+                visible: false
+                content: [ listView ]
+                blocksMouse: true
+            };
+            animate = false;
+        } else {
+            list = Panel {
+                visible: false
+                content: [ listView ]
+                blocksMouse: true
+                clip: bind Rectangle {
+                    x: -2
+                    y: bind node.localToScene(node.layoutBounds).maxY
+                    width: bind control.width + 4
+                    height: 124
+                }
+            };
+        }
         
         node = Group {
             content: [ 
-                focusRect, borderBGRect, text, buttonBGRect, borderLine, arrow
+                Rectangle {
+                    id: "ComboBox-Focus-Border"
+                    x: -focusSize
+                    y: -focusSize
+                    width: bind (control.width + focusSize + focusSize)
+                    height: bind (control.height - 1 + focusSize + focusSize)
+                    arcWidth: cornerRadius
+                    arcHeight: cornerRadius
+                    fill: Color.web(focusBorderFill)
+                    opacity: bind if(control.focused or listView.focused) { 1.0 } else { 0 }
+                },
+                Rectangle {
+                    width: bind control.width
+                    height: bind control.height - 1
+                    arcWidth: cornerRadius
+                    arcHeight: cornerRadius
+                    fill: Color.web(liteShadowFill)
+                },
+                Rectangle {
+                    width: bind control.width
+                    height: bind control.height - 1
+                    arcWidth: cornerRadius
+                    arcHeight: cornerRadius
+                    fill: Color.web(darkShadowFill)
+                },
+                Rectangle {
+                    x: 1
+                    y: 1
+                    width: bind control.width - 2
+                    height: bind control.height - 3
+                    arcWidth: cornerRadius - 1
+                    arcHeight: cornerRadius - 1
+                    fill: Color.web(liteShadowFill)
+                },
+                Rectangle {
+                    x: 2
+                    y: 2
+                    width: bind control.width - 4
+                    height: bind control.height - 5
+                    arcWidth: bind cornerRadius - 2
+                    arcHeight: bind cornerRadius - 2
+                    fill: LinearGradient{
+                        endX: 0
+                        stops: [
+                            Stop { offset: 0 color: Color.web(topFill) },
+                            Stop { offset: 1 color: Color.web(bottomFill) },
+                        ]
+                    }
+                },
+                label = Label {
+                    font: bind font
+                    text: bind "{listView.selectedItem}"
+                    width: bind control.width - buttonWidth - 8
+                    layoutX: bind paddingLeft
+                    layoutY: bind (control.height - label.layoutBounds.height)/2.0
+                    graphicVPos: VPos.CENTER
+                },
+                arrow = Polygon {
+                    layoutX: bind control.width - paddingRight - (buttonWidth - arrow.layoutBounds.width)/2.0 - paddingText
+                    layoutY: bind ((control.height - paddingTop - paddingBottom) - arrow.layoutBounds.height)/2.0
+                    id: "ComboBox-Arrow"
+                    points: [
+                        0, buttonWidth * 0.25,
+                        0, buttonWidth * 0.75,
+                        buttonWidth * 0.35, buttonWidth * 0.5
+                    ]
+                    fill: Color.web(arrowFill)
+                    rotate: 90
+                }
             ]
             focusTraversable: false
+            onMousePressed: function(e) {
+                var x = e.sceneX - e.x;
+                var y = e.sceneY - e.y + node.layoutBounds.height;
+                var visible = not showPopup;
+                show(x, y, visible);
+            }
         }
-
-        node.onMousePressed = function(e) {
-            var x = e.sceneX - e.x;
-            var y = e.sceneY - e.y + node.layoutBounds.height;
-            var visible = not showPopup;
-            show(x, y, visible);
-        }
-
+        
         /**
          * Redirect key events on ListView to Control
          */
@@ -337,26 +317,33 @@ public class ComboBoxSkin extends Skin {
         delete list from node.scene.content;
         insert list into node.scene.content;
 
-        list.layoutX = x + 4;
+        list.layoutX = x + 2;
         showPopup = true;
     }
-
-    override protected function getMinHeight() : Number {
-        return 24;
+    
+    override function intersects(x, y, w, h) : Boolean {
+        return node.intersects(x, y, w, h);
     }
 
-    override protected function getMinWidth() : Number {
-        return 50;
+    override function contains(x, y) : Boolean {
+        return node.contains(x, y);
     }
 
-    override protected function getPrefHeight(width: Number) : Number {
-        return 24;
+    protected override function getMinWidth() : Number {
+        (paddingLeft + (label as Resizable).getMinWidth() + paddingText + buttonWidth + paddingRight) as Integer
     }
 
-    override protected function getPrefWidth(height: Number) : Number {
-        return 100;
+    protected override function getMinHeight() : Number {
+        (paddingTop + (label as Resizable).getMinHeight() + paddingBottom) as Integer
     }
 
+    protected override function getPrefWidth(height:Number) : Number {
+        (paddingLeft + label.getPrefWidth(-1) + paddingText + buttonWidth + paddingRight) as Integer
+    }
+
+    protected override function getPrefHeight(width:Number) : Number {
+        (paddingTop + label.getPrefHeight(-1) + paddingBottom) as Integer
+    }
 }
 
 class ComboBoxBehavior extends Behavior {
