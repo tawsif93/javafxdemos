@@ -53,6 +53,7 @@ import javafx.scene.control.Label;
 import javafx.scene.Node;
 import javafx.scene.shape.Polygon;
 import javafx.scene.layout.Panel;
+import javafx.scene.shape.Line;
 
 
 /**
@@ -252,13 +253,29 @@ public class ComboBoxSkin extends Skin {
                 label = Label {
                     font: bind font
                     text: bind "{listView.selectedItem}"
-                    width: bind control.width - buttonWidth - 8
+                    width: bind control.width - buttonWidth - paddingLeft - paddingRight
                     layoutX: bind paddingLeft
                     layoutY: bind (control.height - label.layoutBounds.height)/2.0
                     graphicVPos: VPos.CENTER
                 },
+                Group {
+                    layoutX: bind (control.width - buttonWidth - paddingRight + 5)
+                    content: [
+                        Line {
+                            endY: bind (control.height - 2)
+                            stroke: Color.web(darkShadowFill)
+                        },
+                        Line {
+                            startX: 1
+                            endX: 1
+                            startY: 1
+                            endY: bind (control.height - 3)
+                            stroke: Color.web(liteShadowFill)
+                        }
+                    ]
+                },
                 arrow = Polygon {
-                    layoutX: bind control.width - paddingRight - (buttonWidth - arrow.layoutBounds.width)/2.0 - paddingText
+                    layoutX: bind control.width - paddingRight - (buttonWidth - arrow.layoutBounds.width)/2.0
                     layoutY: bind ((control.height - paddingTop - paddingBottom) - arrow.layoutBounds.height)/2.0
                     id: "ComboBox-Arrow"
                     points: [
