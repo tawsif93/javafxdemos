@@ -28,10 +28,10 @@ public class InputForm extends CustomNode {
         panel.requestLayout();
     }
 
-    var paddingTop = 20;
-    var paddingLeft = 20;
-    var paddingBottom = 20;
-    var paddingRight = 20;
+    var paddingTop = 20.0;
+    var paddingLeft = 20.0;
+    var paddingBottom = 20.0;
+    var paddingRight = 20.0;
 
     var panel : Panel;
 
@@ -72,46 +72,77 @@ public class InputForm extends CustomNode {
 
         var hSpacing = 10.0;
         var vSpacing = 5.0;
-        var gridW = 50;
-        var gridH = 25;
+        var gridW = 50.0;
+        var gridH = 25.0;
 
         idLabel.height = gridH;
-        panel.positionNode(idLabel, (paddingLeft + gridW) - idLabel.layoutBounds.width, paddingTop);
-        panel.resizeNode(idText, 50, gridH);
-        panel.positionNode(idText, paddingLeft + gridW + hSpacing, paddingTop);
+        var x = (paddingLeft + gridW) - idLabel.layoutBounds.width;
+        var y = paddingTop;
+        var w = idLabel.layoutBounds.width;
+        var h = gridH;
+        panel.layoutNode(idLabel, x, y, w, h);
 
-        nameLabel.height = gridH;
-        panel.positionNode(nameLabel, (paddingLeft + gridW) - nameLabel.layoutBounds.width, idLabel.layoutY + gridH + vSpacing);
-        panel.positionNode(nameText, paddingLeft + gridW + hSpacing, nameLabel.layoutY);
-        panel.resizeNode(nameText, 150, gridH);
+        x = paddingLeft + gridW + hSpacing;
+        w = 50;
+        panel.layoutNode(idText, x, y, w, h);
 
-        addressLabel.height = gridH;
-        panel.positionNode(addressLabel, (paddingLeft + gridW) - addressLabel.layoutBounds.width, nameLabel.layoutY + gridH + vSpacing);
-        panel.positionNode(address1Text, paddingLeft + gridW + hSpacing, addressLabel.layoutY);
-        panel.resizeNode(address1Text, scene.width - paddingLeft - paddingRight - gridW - hSpacing, gridH);
-        panel.positionNode(address2Text, address1Text.layoutX, address1Text.layoutY + gridH + vSpacing);
-        panel.resizeNode(address2Text, address1Text.layoutBounds.width, gridH);
-        panel.positionNode(address3Text, address2Text.layoutX, address2Text.layoutY + gridH + vSpacing);
-        panel.resizeNode(address3Text, address2Text.layoutBounds.width, gridH);
-        panel.positionNode(address4Text, address3Text.layoutX, address3Text.layoutY + gridH + vSpacing);
-        panel.resizeNode(address4Text, address3Text.layoutBounds.width, gridH);
+        x = (paddingLeft + gridW) - nameLabel.layoutBounds.width;
+        y = idLabel.layoutY + gridH + vSpacing;
+        w = nameLabel.layoutBounds.width;
+        panel.layoutNode(nameLabel, x, y, w, h);
 
-        emailLabel.height = gridH;
-        panel.positionNode(emailLabel, (paddingLeft + gridW) - emailLabel.layoutBounds.width, address4Text.layoutY + gridH + vSpacing);
-        panel.positionNode(emailText, paddingLeft + gridW + hSpacing, emailLabel.layoutY);
-        panel.resizeNode(emailText, 150, gridH);
+        x = paddingLeft + gridW + hSpacing;
+        w = 150;
+        panel.layoutNode(nameText, x, y, w, h);
 
-        prefComnLabel.height = gridH;
-        panel.positionNode(prefComnLabel, (paddingLeft + gridW) - prefComnLabel.layoutBounds.width, emailLabel.layoutY + gridH + vSpacing);
-        smailRadio.height = gridH;
-        panel.positionNode(smailRadio, paddingLeft + gridW + hSpacing, prefComnLabel.layoutY);
-        emailRadio.height = gridH;
-        panel.positionNode(emailRadio, smailRadio.layoutX + smailRadio.layoutBounds.width + hSpacing, prefComnLabel.layoutY);
+        x = (paddingLeft + gridW) - addressLabel.layoutBounds.width;
+        y = nameLabel.layoutY + gridH + vSpacing;
+        w = addressLabel.layoutBounds.width;
+        panel.layoutNode(addressLabel, x, y, w, h);
 
-        saveButton.width = cancelButton.width;
-        var buttonPanelWidth = (saveButton.width * 2) + hSpacing;
-        panel.positionNode(saveButton, (scene.width - buttonPanelWidth)/2.0, emailRadio.layoutY + (gridH * 2));
+        x = paddingLeft + gridW + hSpacing;
+        y = addressLabel.layoutY;
+        w = scene.width - paddingLeft - paddingRight - gridW - hSpacing;
+        panel.layoutNode(address1Text, x, y, w, h);
+
+        y = address1Text.layoutY + gridH + vSpacing;
+        panel.layoutNode(address2Text, x, y, w, h);
         
-        panel.positionNode(cancelButton, saveButton.layoutX + hSpacing + saveButton.layoutBounds.width, saveButton.layoutY);
+        y = address2Text.layoutY + gridH + vSpacing;
+        panel.layoutNode(address3Text, x, y, w, h);
+
+        y = address3Text.layoutY + gridH + vSpacing;
+        panel.layoutNode(address4Text, x, y, w, h);
+
+        x = (paddingLeft + gridW) - emailLabel.layoutBounds.width;
+        y = address4Text.layoutY + gridH + vSpacing;
+        w = emailLabel.layoutBounds.width;
+        panel.layoutNode(emailLabel, x, y, w, h);
+
+        x = paddingLeft + gridW + hSpacing;
+        w = 120;
+        panel.layoutNode(emailText, x, y, w, h);
+
+        x = (paddingLeft + gridW) - prefComnLabel.layoutBounds.width;
+        y = emailLabel.layoutY + gridH + vSpacing;
+        w = prefComnLabel.layoutBounds.width;
+        panel.layoutNode(prefComnLabel, x, y, w, h);
+
+        x = paddingLeft + gridW + hSpacing;
+        w = smailRadio.layoutBounds.width;
+        panel.layoutNode(smailRadio, x, y, w, h);
+
+        x = smailRadio.layoutX + smailRadio.layoutBounds.width + hSpacing;
+        w = emailRadio.layoutBounds.width;
+        panel.layoutNode(emailRadio, x, y, w, h);
+
+        var buttonPanelWidth = (saveButton.width * 2) + hSpacing;
+        x = (scene.width - buttonPanelWidth)/2.0;
+        y = emailRadio.layoutY + (gridH * 2);
+        w = saveButton.layoutBounds.width;
+        panel.layoutNode(saveButton, x, y, w, h);
+
+        x = saveButton.layoutX + hSpacing + saveButton.layoutBounds.width;
+        panel.layoutNode(cancelButton, x, y, w, h);
     }
 }
