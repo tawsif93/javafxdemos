@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" version="1.0" codebase="http://mediacast.sun.com/users/rakeshmenonp/media/" href="ApacheDerby.jnlp">
+    <information>
+        <title>Apache Derby</title>
+        <vendor>The Apache Software Foundation</vendor>
+        <homepage href="http://db.apache.org/derby/"/>
+        <description>Apache Derby Extension</description>
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <update check="background"/>
+    <resources>
+        <jar href="derby.jar" download="eager"/>
+        <jar href="derbyclient.jar" download="eager"/>
+        <jar href="derbynet.jar" download="eager"/>
+    </resources>
+    <component-desc/>
+</jnlp>

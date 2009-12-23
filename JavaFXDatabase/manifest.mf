@@ -1,0 +1,3 @@
+Manifest-Version: 1.1
+Class-Path: derby.jar derbyclient.jar derbynet.jar
+Main-Class: javafxdatabase.Main
