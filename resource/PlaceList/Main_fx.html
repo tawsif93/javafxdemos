@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title></title>
+<style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+<div align="left" class="java">
+    <table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+            <td nowrap="nowrap" valign="top" align="left">
+                <code>
+                    <font color="#3f7f5f">/*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Main.fx</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Created&nbsp;on&nbsp;9&nbsp;Jun,&nbsp;2009,&nbsp;6:31:20&nbsp;PM</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">placelist;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.data.pull.PullParser;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.ext.swing.SwingComponent;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.geometry.HPos;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.geometry.VPos;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.io.http.HttpRequest;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.Label;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.TextBox;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.image.Image;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.image.ImageView;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.layout.HBox;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.layout.LayoutInfo;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.layout.VBox;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Scene;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.Alert;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.Stage;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.StageStyle;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javax.swing.JComboBox;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">placelist.Place;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">placelist.XMLParser;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">Rakesh&nbsp;Menon</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Obtain&nbsp;appid&nbsp;from&nbsp;http://developer.yahoo.com/wsregapp/</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#000000">var&nbsp;appid&nbsp;=&nbsp;</font><font color="#2a00ff">&#34;abcd&#34;</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Server&nbsp;Side</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">function&nbsp;findPlaces</font><font color="#000000">(</font><font color="#000000">url&nbsp;:&nbsp;String</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">placesList.removeAllItems</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">placesList.setEnabled</font><font color="#000000">(</font><font color="#7f0055"><b>false</b></font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">println</font><font color="#000000">(</font><font color="#2a00ff">&#34;Finding&nbsp;places&nbsp;in&nbsp;\&#34;{url}\&#34;&nbsp;document&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">var&nbsp;httpRequest&nbsp;=&nbsp;HttpRequest&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">location:&nbsp;</font><font color="#2a00ff">&#34;http://wherein.yahooapis.com/v1/document&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">method:&nbsp;HttpRequest.POST</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onOutput:&nbsp;function</font><font color="#000000">(</font><font color="#000000">os</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>try&nbsp;</b></font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">var&nbsp;out&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">java.io.PrintStream</font><font color="#000000">(</font><font color="#000000">os</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.print</font><font color="#000000">(</font><font color="#2a00ff">&#34;documentURL={url}&amp;&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.print</font><font color="#000000">(</font><font color="#2a00ff">&#34;documentType=text/html&amp;&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.print</font><font color="#000000">(</font><font color="#2a00ff">&#34;outputType=rss&amp;&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.print</font><font color="#000000">(</font><font color="#2a00ff">&#34;appid={appid}&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.flush</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">out.close</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>finally&nbsp;</b></font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">os.close</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onException:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//e.printStackTrace();</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*&nbsp;http://developer.yahoo.com/geo/placemaker/guide/api-reference.html</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">e.getMessage</font><font color="#000000">()&nbsp;</font><font color="#000000">==&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.inform</font><font color="#000000">(</font><font color="#2a00ff">&#34;{e}&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;if</b></font><font color="#000000">(</font><font color="#000000">e.getMessage</font><font color="#000000">()</font><font color="#000000">.contains</font><font color="#000000">(</font><font color="#2a00ff">&#34;400&#34;</font><font color="#000000">))&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.inform</font><font color="#000000">(</font><font color="#2a00ff">&#34;400&nbsp;Bad&nbsp;Request&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;if</b></font><font color="#000000">(</font><font color="#000000">e.getMessage</font><font color="#000000">()</font><font color="#000000">.contains</font><font color="#000000">(</font><font color="#2a00ff">&#34;404&#34;</font><font color="#000000">))&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.inform</font><font color="#000000">(</font><font color="#2a00ff">&#34;404&nbsp;Not&nbsp;Found&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;if</b></font><font color="#000000">(</font><font color="#000000">e.getMessage</font><font color="#000000">()</font><font color="#000000">.contains</font><font color="#000000">(</font><font color="#2a00ff">&#34;413&#34;</font><font color="#000000">))&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.inform</font><font color="#000000">(</font><font color="#2a00ff">&#34;413&nbsp;Request&nbsp;Entity&nbsp;Too&nbsp;Large&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;if</b></font><font color="#000000">(</font><font color="#000000">e.getMessage</font><font color="#000000">()</font><font color="#000000">.contains</font><font color="#000000">(</font><font color="#2a00ff">&#34;415&#34;</font><font color="#000000">))&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.inform</font><font color="#000000">(</font><font color="#2a00ff">&#34;415&nbsp;Unsupported&nbsp;Media&nbsp;Type&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;if</b></font><font color="#000000">(</font><font color="#000000">e.getMessage</font><font color="#000000">()</font><font color="#000000">.contains</font><font color="#000000">(</font><font color="#2a00ff">&#34;999&#34;</font><font color="#000000">))&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.inform</font><font color="#000000">(</font><font color="#2a00ff">&#34;999&nbsp;Unable&nbsp;to&nbsp;process&nbsp;request&nbsp;at&nbsp;this&nbsp;time&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.inform</font><font color="#000000">(</font><font color="#2a00ff">&#34;{e.getMessage()}&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onInput:&nbsp;function</font><font color="#000000">(</font><font color="#000000">is</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">var&nbsp;xmlParser&nbsp;=&nbsp;XMLParser&nbsp;</font><font color="#000000">{&nbsp;</font><font color="#000000">onDone:&nbsp;onPlaces&nbsp;</font><font color="#000000">}</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">xmlParser.parse</font><font color="#000000">(</font><font color="#000000">is</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">is.close</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">httpRequest.start</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">function&nbsp;updateMap</font><font color="#000000">(</font><font color="#000000">place&nbsp;:&nbsp;Place</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">var&nbsp;httpRequest&nbsp;=&nbsp;HttpRequest&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">location:&nbsp;</font><font color="#2a00ff">&#34;http://local.yahooapis.com/MapsService/V1/mapImage?{place.toMapURL()}&amp;appid={appid}&amp;zoom=12&amp;image_width=400&amp;image_height=300&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">method:&nbsp;HttpRequest.GET</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onException:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">e.printStackTrace</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onInput:&nbsp;function</font><font color="#000000">(</font><font color="#000000">is</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">var&nbsp;pullParser&nbsp;=&nbsp;PullParser&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">input:&nbsp;is</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onEvent:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">e.type&nbsp;==&nbsp;PullParser.TEXT</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">not&nbsp;placesList.isEnabled</font><font color="#000000">())&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">placesList.setEnabled</font><font color="#000000">(</font><font color="#7f0055"><b>true</b></font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">place.imageURL&nbsp;=&nbsp;</font><font color="#2a00ff">&#34;{e.text}&#34;</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">placesList.addItem</font><font color="#000000">(</font><font color="#000000">place</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">pullParser.parse</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">is.close</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">httpRequest.start</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">function&nbsp;onPlaces</font><font color="#000000">(</font><font color="#000000">places&nbsp;:&nbsp;Place</font><font color="#000000">[])&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">println</font><font color="#000000">(</font><font color="#2a00ff">&#34;Number&nbsp;of&nbsp;places&nbsp;found:&nbsp;{sizeof&nbsp;places}&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>for</b></font><font color="#000000">(</font><font color="#000000">place&nbsp;in&nbsp;places</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">updateMap</font><font color="#000000">(</font><font color="#000000">place</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Client&nbsp;Side</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;waitImage&nbsp;=&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/wait.jpg&#34;</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;urlTextBox&nbsp;:&nbsp;TextBox&nbsp;=&nbsp;TextBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;http://en.wikipedia.org/wiki/Wonders_of_the_World&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">action:&nbsp;function</font><font color="#000000">()&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">findPlaces</font><font color="#000000">(</font><font color="#000000">urlTextBox.rawText</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">layoutInfo:&nbsp;LayoutInfo&nbsp;</font><font color="#000000">{&nbsp;</font><font color="#000000">minWidth:&nbsp;</font><font color="#990000">350&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">350&nbsp;</font><font color="#000000">maxWidth:&nbsp;</font><font color="#990000">350&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;hBox1&nbsp;=&nbsp;HBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Label&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;URL&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">layoutInfo:&nbsp;LayoutInfo&nbsp;</font><font color="#000000">{&nbsp;</font><font color="#000000">vpos:&nbsp;VPos.CENTER&nbsp;minWidth:&nbsp;</font><font color="#990000">45&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">45&nbsp;</font><font color="#000000">maxWidth:&nbsp;</font><font color="#990000">45&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">urlTextBox</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;placesList&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JComboBox</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#000000">var&nbsp;actionListener&nbsp;=&nbsp;java.awt.event.ActionListener&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;</b></font><font color="#000000">override&nbsp;function&nbsp;actionPerformed</font><font color="#000000">(</font><font color="#000000">ae&nbsp;:&nbsp;java.awt.event.ActionEvent</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">var&nbsp;place&nbsp;=&nbsp;placesList.getSelectedItem</font><font color="#000000">()&nbsp;</font><font color="#000000">as&nbsp;Place;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">place&nbsp;!=&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">imageView.image&nbsp;=&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">400</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">300</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;place.imageURL</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">backgroundLoading:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">placeholder:&nbsp;waitImage</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><font color="#000000">;</font><br />
+                    <font color="#000000">placesList.addActionListener</font><font color="#000000">(</font><font color="#000000">actionListener</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;placesListFX&nbsp;:&nbsp;SwingComponent&nbsp;=&nbsp;SwingComponent.wrap</font><font color="#000000">(</font><font color="#000000">placesList</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#000000">placesListFX.layoutInfo&nbsp;=&nbsp;LayoutInfo&nbsp;</font><font color="#000000">{&nbsp;</font><font color="#000000">minWidth:&nbsp;</font><font color="#990000">350&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">350&nbsp;</font><font color="#000000">maxWidth:&nbsp;</font><font color="#990000">350&nbsp;</font><font color="#000000">}</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;hBox2&nbsp;=&nbsp;HBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Label&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;Places&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">layoutInfo:&nbsp;LayoutInfo&nbsp;</font><font color="#000000">{&nbsp;</font><font color="#000000">vpos:&nbsp;VPos.CENTER&nbsp;minWidth:&nbsp;</font><font color="#990000">45&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">45&nbsp;</font><font color="#000000">maxWidth:&nbsp;</font><font color="#990000">45&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">placesListFX</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;imageView&nbsp;=&nbsp;ImageView&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">image:&nbsp;waitImage</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">layoutInfo:&nbsp;LayoutInfo&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">vpos:&nbsp;VPos.CENTER</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">hpos:&nbsp;HPos.CENTER</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">minWidth:&nbsp;</font><font color="#990000">400</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">400</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">maxWidth:&nbsp;</font><font color="#990000">400</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">minHeight:&nbsp;</font><font color="#990000">300</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">300</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">maxHeight:&nbsp;</font><font color="#990000">300</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;vBox&nbsp;=&nbsp;VBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">spacing:&nbsp;</font><font color="#990000">10</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">hBox1,&nbsp;hBox2,&nbsp;imageView&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;</font><font color="#990000">10</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">10</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">Stage&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">title:&nbsp;</font><font color="#2a00ff">&#34;JavaFX&nbsp;+&nbsp;Placemaker&nbsp;+&nbsp;Maps&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">420</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">410</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">scene:&nbsp;Scene&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">vBox&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">resizable:&nbsp;</font><font color="#7f0055"><b>false</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//style:&nbsp;StageStyle.UNDECORATED</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#000000">findPlaces</font><font color="#000000">(</font><font color="#000000">urlTextBox.rawText</font><font color="#000000">)</font><font color="#000000">;</font>
+                </code>    
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

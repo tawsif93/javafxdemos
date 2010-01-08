@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+<style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+<div align="left" class="java">
+    <table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+            <td nowrap="nowrap" valign="top" align="left">
+                <code>
+                    <font color="#3f7f5f">/*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Main.fx</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Created&nbsp;on&nbsp;30&nbsp;Apr,&nbsp;2009,&nbsp;5:00:04&nbsp;PM</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">fisheyemenu;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.lang.Math;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Cursor;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.image.Image;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.image.ImageView;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.input.MouseEvent;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Color;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Scene;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Group;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.shape.Rectangle;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.Stage;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">Rakesh&nbsp;Menon</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;bgRect&nbsp;=&nbsp;Rectangle&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">800</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">300</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMouseMoved:&nbsp;onMouseMoved</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.WHITE</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">cursor:&nbsp;Cursor.HAND</font><br />
+                    <font color="#000000">}</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;imageView&nbsp;:&nbsp;ImageView</font><font color="#000000">[]</font><font color="#000000">;</font><br />
+                    <font color="#7f0055"><b>for</b></font><font color="#000000">(</font><font color="#000000">i&nbsp;in&nbsp;</font><font color="#000000">[</font><font color="#990000">0..7</font><font color="#000000">])&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">insert&nbsp;ImageView&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;</font><font color="#990000">60&nbsp;</font><font color="#000000">*&nbsp;i</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">image:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/logo_{i}.gif&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">scaleX:&nbsp;</font><font color="#990000">0.65</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">scaleY:&nbsp;</font><font color="#990000">0.65</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">smooth:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMouseMoved:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">e.node.toFront</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#000000">into&nbsp;imageView;</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">def&nbsp;maxScale&nbsp;=&nbsp;</font><font color="#990000">2.0</font><font color="#000000">;</font><br />
+                    <font color="#000000">def&nbsp;multiplier&nbsp;=&nbsp;</font><font color="#990000">60.0</font><font color="#000000">;</font><br />
+                    <font color="#000000">function&nbsp;onMouseMoved</font><font color="#000000">(</font><font color="#000000">e&nbsp;:&nbsp;MouseEvent</font><font color="#000000">)&nbsp;</font><font color="#000000">:&nbsp;Void&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>for</b></font><font color="#000000">(</font><font color="#000000">iv&nbsp;in&nbsp;imageView</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">var&nbsp;imageScale&nbsp;=&nbsp;maxScale&nbsp;-&nbsp;Math.min</font><font color="#000000">(</font><font color="#000000">maxScale&nbsp;-&nbsp;</font><font color="#990000">1</font><font color="#000000">,&nbsp;Math.abs</font><font color="#000000">(</font><font color="#000000">e.x&nbsp;-&nbsp;</font><font color="#000000">(</font><font color="#000000">iv.translateX&nbsp;+&nbsp;</font><font color="#990000">70&nbsp;</font><font color="#000000">/&nbsp;</font><font color="#990000">2</font><font color="#000000">))&nbsp;</font><font color="#000000">/&nbsp;multiplier</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">iv.scaleX&nbsp;=&nbsp;imageScale/</font><font color="#990000">1.5</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">iv.scaleY&nbsp;=&nbsp;imageScale/</font><font color="#990000">1.5</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">Stage&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">title:&nbsp;</font><font color="#2a00ff">&#34;Fish&nbsp;Eye&nbsp;Menu&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">scene:&nbsp;Scene&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">bgRect,&nbsp;Group&nbsp;</font><font color="#000000">{&nbsp;</font><font color="#000000">content:&nbsp;imageView&nbsp;</font><font color="#000000">}&nbsp;]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">570</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">150</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">resizable:&nbsp;</font><font color="#7f0055"><b>false</b></font><br />
+                    <font color="#000000">}</font></code>    
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

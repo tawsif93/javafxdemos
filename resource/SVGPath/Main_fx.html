@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+  <style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+
+
+<div align="left" class="java">
+<table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+   <tr>
+   <td nowrap="nowrap" valign="top" align="left">
+    <code>
+<font color="#3f7f5f">/*</font><br />
+<font color="#3f7f5f">*&nbsp;Main.fx</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Created&nbsp;on&nbsp;9&nbsp;Mar,&nbsp;2009,&nbsp;4:33:00&nbsp;PM</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
+<font color="#ffffff"></font><br />
+<font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">svgpath;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.lang.FX;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Cursor;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.effect.DropShadow;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Group;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.input.MouseEvent;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Color;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.RadialGradient;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Stop;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Scene;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.shape.SVGPath;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.text.Font;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.text.Text;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.text.TextOrigin;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.Stage;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.StageStyle;</font><br />
+<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">svgpath.ColorChooser;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f5fbf">/**</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">Rakesh&nbsp;Menon</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#ffffff"></font><br />
+<font color="#000000">var&nbsp;svgPath:&nbsp;SVGPath</font><font color="#000000">[]</font><font color="#000000">;</font><br />
+<font color="#000000">var&nbsp;selSVGPath:&nbsp;SVGPath;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f7f5f">//&nbsp;Handle&nbsp;SVGPath&nbsp;selected&nbsp;event</font><br />
+<font color="#000000">function&nbsp;onSVGPathSelect</font><font color="#000000">(&nbsp;</font><font color="#000000">e:&nbsp;MouseEvent</font><font color="#000000">)&nbsp;</font><font color="#000000">:&nbsp;Void&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;Reset&nbsp;stroke&nbsp;color</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">selSVGPath&nbsp;!=&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">)&nbsp;{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">selSVGPath.stroke&nbsp;=&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">selSVGPath&nbsp;=&nbsp;e.node&nbsp;as&nbsp;SVGPath;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">selSVGPath.stroke&nbsp;=&nbsp;Color.BLUE;</font><br />
+<font color="#000000">}</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f7f5f">//&nbsp;Handle&nbsp;ColorChooser&nbsp;selection</font><br />
+<font color="#000000">function&nbsp;onColorChooserSelect</font><font color="#000000">(&nbsp;</font><font color="#000000">e:&nbsp;MouseEvent</font><font color="#000000">)&nbsp;</font><font color="#000000">:&nbsp;Void&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff"></font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;No&nbsp;node&nbsp;selected</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">selSVGPath&nbsp;==&nbsp;</font><font color="#7f0055"><b>null</b></font><font color="#000000">)&nbsp;{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return</b></font><font color="#000000">;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">selSVGPath.fill&nbsp;</font><font color="#7f0055"><b>instanceof&nbsp;</b></font><font color="#000000">Color</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">selSVGPath.fill&nbsp;=&nbsp;colorChooser.color;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">selSVGPath.fill&nbsp;=&nbsp;RadialGradient&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">centerX:&nbsp;</font><font color="#990000">0.75</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">centerY:&nbsp;</font><font color="#990000">0.5</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">radius:&nbsp;</font><font color="#990000">1.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">stops:&nbsp;</font><font color="#000000">[</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Stop&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">offset:&nbsp;</font><font color="#990000">0.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">color:&nbsp;Color.LIGHTGRAY</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Stop&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">offset:&nbsp;</font><font color="#990000">0.5</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">color:&nbsp;colorChooser.color;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#000000">}</font><br />
+<font color="#ffffff"></font><br />
+<font color="#000000">var&nbsp;scene&nbsp;=&nbsp;Scene&nbsp;</font><font color="#000000">{</font><br />
+<font color="#000000">}</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f5fbf">/**</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Color&nbsp;Chooser</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#000000">var&nbsp;colorChooser:&nbsp;ColorChooser&nbsp;=&nbsp;ColorChooser&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;bind&nbsp;</font><font color="#000000">(</font><font color="#000000">scene.width&nbsp;-&nbsp;</font><font color="#990000">454</font><font color="#000000">)&nbsp;</font><font color="#000000">/&nbsp;</font><font color="#990000">2.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;bind&nbsp;scene.height&nbsp;-&nbsp;</font><font color="#990000">108</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;onColorChooserSelect</font><br />
+<font color="#000000">}</font><font color="#000000">;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f5fbf">/**</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Duke&nbsp;SVGPath</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#000000">var&nbsp;svgGroup:&nbsp;Group&nbsp;=&nbsp;Group&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;bind&nbsp;svgPath</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">10</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;bind&nbsp;</font><font color="#000000">(</font><font color="#000000">scene.width&nbsp;-&nbsp;svgGroup.boundsInLocal.width</font><font color="#000000">)&nbsp;</font><font color="#000000">/&nbsp;</font><font color="#990000">2.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">cursor:&nbsp;Cursor.HAND</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">effect:&nbsp;DropShadow&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">offsetX:&nbsp;</font><font color="#990000">10</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">offsetY:&nbsp;</font><font color="#990000">10</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">color:&nbsp;Color.color</font><font color="#000000">(</font><font color="#990000">0.4</font><font color="#000000">,&nbsp;</font><font color="#990000">0.4</font><font color="#000000">,&nbsp;</font><font color="#990000">0.4</font><font color="#000000">)</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#000000">}</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f7f5f">//&nbsp;Head&nbsp;+&nbsp;Body</font><br />
+<font color="#000000">insert</font><br />
+<font color="#000000">SVGPath&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#2a00ff">&#34;M48.859,43.518c8.424,17.64,2.736,140.832-7.128,184.032&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;c-9.864,43.272-19.728,98.28-22.032,144.576c-1.008,19.728,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;2.016,27.504,14.904,27.504c22.752,0,51.624-47.952,87.84-46.872&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;c36.288,1.08,47.808,55.008,64.8,54.648c16.992-0.36,30.672-6.264,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;30.816-58.752C218.563,191.981,87.235,64.973,48.859,43.518&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;L48.859,43.518L48.859,43.518L48.859,43.518z&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.BLACK</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeWidth:&nbsp;</font><font color="#990000">3.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeDashArray:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#990000">10</font><font color="#000000">,&nbsp;</font><font color="#990000">5</font><font color="#000000">,&nbsp;</font><font color="#990000">10&nbsp;</font><font color="#000000">]</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;onSVGPathSelect</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">blocksMouse:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+<font color="#000000">}&nbsp;</font><font color="#000000">into&nbsp;svgPath;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f7f5f">//&nbsp;Duke&nbsp;Shape</font><br />
+<font color="#000000">insert</font><br />
+<font color="#000000">SVGPath&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#2a00ff">&#34;M162.763,168.726c7.992,13.464,28.368,3.096,29.232-12.096&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;c0.864-15.192-1.368-34.344-11.232-35.064c-9.864-0.72-16.92-&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;10.584-26.784-11.304c-9.864-0.72-20.448,9.144-25.056-3.96&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;s12.384-18.648,25.056-20.736c-11.304-11.304-17.928-23.832-&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;22.896-36.864c-4.968-13.032-8.64-24.984,5.256-30.096c13.896-&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;5.112,12.744,21.168,28.656,33.192c-4.68-17.712-6.408-25.056-&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;6.048-35.352s-0.36-18.144,14.256-16.128c14.616,2.016,8.28,32.4,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;19.656,44.784c3.456-11.736,5.544-26.64,13.896-32.76s27.36-6.264,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;15.264,18.864c-12.096,25.128,3.528,38.736-0.144,58.536c-3.672,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;19.8-15.048,16.2-19.944,28.944c-4.896,12.744,2.88,41.76-6.336,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;54.792c-9.216,13.032-10.872,33.048-4.896,49.032C172.339,205.374,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;162.763,168.726,162.763,168.726L162.763,168.726L162.763,168.726&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;L162.763,168.726z&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.BLACK</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeWidth:&nbsp;</font><font color="#990000">3.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeDashArray:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#990000">10</font><font color="#000000">,&nbsp;</font><font color="#990000">5</font><font color="#000000">,&nbsp;</font><font color="#990000">10&nbsp;</font><font color="#000000">]</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;onSVGPathSelect</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">blocksMouse:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+<font color="#000000">}&nbsp;</font><font color="#000000">into&nbsp;svgPath;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f7f5f">//&nbsp;Left&nbsp;Hand</font><br />
+<font color="#000000">insert</font><br />
+<font color="#000000">SVGPath&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#2a00ff">&#34;M48.355,185.646c-7.416,50.832-33.192,56.88-34.488,77.976&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;c-1.296,21.096,6.84,23.112,6.336,42.624c-0.504,19.512-17.&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;856,27.432-19.944,38.016s8.928,13.968,15.336,13.968c6.408,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;0,12.816-28.08,15.408-45.936s-8.496-28.368-8.496-40.608c0-&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;12.24,16.056-34.632,13.104-14.976C48.931,235.686,55.268,208&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;.901,48.355,185.646L48.355,185.646L48.355,185.646L48.355,185.646z&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.BLACK</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeWidth:&nbsp;</font><font color="#990000">3.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeDashArray:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#990000">10</font><font color="#000000">,&nbsp;</font><font color="#990000">5</font><font color="#000000">,&nbsp;</font><font color="#990000">10&nbsp;</font><font color="#000000">]</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;onSVGPathSelect</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">blocksMouse:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+<font color="#000000">}&nbsp;</font><font color="#000000">into&nbsp;svgPath;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f7f5f">//&nbsp;Body</font><br />
+<font color="#000000">insert</font><br />
+<font color="#000000">SVGPath&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#2a00ff">&#34;M58.292,205.013c-5.616,27.504-40.68,181.08-22.824,183.024&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;c17.856,1.944,43.272-47.52,84.888-47.16c41.688,0.36,58.104,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;55.44,68.256,55.08c10.152-0.36,16.848,3.6,17.928-58.464&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;c1.08-62.064-36.792-141.336-59.184-176.256C116.971,163.181,&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;84.283,187.518,58.292,205.013L58.292,205.013L58.292,205.013&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;L58.292,205.013z&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.WHITE</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeWidth:&nbsp;</font><font color="#990000">3.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeDashArray:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#990000">10</font><font color="#000000">,&nbsp;</font><font color="#990000">5</font><font color="#000000">,&nbsp;</font><font color="#990000">10&nbsp;</font><font color="#000000">]</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;onSVGPathSelect</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">blocksMouse:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+<font color="#000000">}&nbsp;</font><font color="#000000">into&nbsp;svgPath;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f7f5f">//&nbsp;Nose</font><br />
+<font color="#000000">insert</font><br />
+<font color="#000000">SVGPath&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#2a00ff">&#34;M147.082,171.533c-1.662-17.195-14.407-27.988-30.895-30.627c-15.&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;924-2.549-33.26,4.998-44.408,16.146c-12.538,12.538-13.039,29.978-&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;4.26,44.833c8.661,14.657,27.847,19.501,43.563,15.835C132.588,212&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2a00ff">&#34;.705,148.48,193.896,147.082,171.533&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;RadialGradient&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">centerX:&nbsp;</font><font color="#990000">0.75</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">centerY:&nbsp;</font><font color="#990000">0.5</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">radius:&nbsp;</font><font color="#990000">1.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">stops:&nbsp;</font><font color="#000000">[</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Stop&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">offset:&nbsp;</font><font color="#990000">0.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">color:&nbsp;Color.LIGHTGRAY</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Stop&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">offset:&nbsp;</font><font color="#990000">0.5</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">color:&nbsp;Color.RED</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeWidth:&nbsp;</font><font color="#990000">3.0</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">strokeDashArray:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#990000">10</font><font color="#000000">,&nbsp;</font><font color="#990000">5</font><font color="#000000">,&nbsp;</font><font color="#990000">10&nbsp;</font><font color="#000000">]</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;onSVGPathSelect</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">blocksMouse:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+<font color="#000000">}&nbsp;</font><font color="#000000">into&nbsp;svgPath;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#3f5fbf">/**</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;Close&nbsp;Button</font><br />
+<font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+<font color="#000000">var&nbsp;closeButton&nbsp;=&nbsp;Text&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#2a00ff">&#34;X&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.BLACK</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;</font><font color="#990000">440</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">10</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textOrigin:&nbsp;TextOrigin.TOP</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">font:&nbsp;Font&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">name:&nbsp;</font><font color="#2a00ff">&#34;Bitstream&nbsp;Vera&nbsp;Sans&nbsp;Bold&#34;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">size:&nbsp;</font><font color="#990000">18</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">cursor:&nbsp;Cursor.HAND</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">visible:&nbsp;bind&nbsp;</font><font color="#000000">(</font><font color="#2a00ff">&#34;{__PROFILE__}&#34;&nbsp;</font><font color="#000000">!=&nbsp;</font><font color="#2a00ff">&#34;browser&#34;</font><font color="#000000">)</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">FX.exit</font><font color="#000000">()</font><font color="#000000">;</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+<font color="#000000">}</font><br />
+<font color="#ffffff"></font><br />
+<font color="#000000">scene.content&nbsp;=&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">svgGroup,&nbsp;colorChooser,&nbsp;closeButton&nbsp;</font><font color="#000000">]</font><font color="#000000">;</font><br />
+<font color="#ffffff"></font><br />
+<font color="#000000">Stage&nbsp;</font><font color="#000000">{</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">scene:&nbsp;scene</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">460</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">580</font><br />
+<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">style:&nbsp;StageStyle.UNDECORATED</font><br />
+<font color="#000000">}</font></code>    
+   </td>
+   </tr>
+</table>
+</div>
+</body></html>

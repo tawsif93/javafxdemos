@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/JavaFXYT/" href="JavaFXYT.jnlp">
+    <information>
+        <title>JavaFXYT</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href="http://javafxdemos.googlecode.com/hg/resource/JavaFXYT/"/>
+        <description>JavaFXYT</description>
+        <offline-allowed/>
+        <shortcut>
+            <desktop/>
+        </shortcut>
+    </information>
+    <resources>
+        <j2se version="1.6+"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <property name="jnlp.versionEnabled" value="true"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="JavaFXYT.jar" main="true"/>
+    </resources>
+    <application-desc main-class="com.sun.javafx.runtime.main.Main">
+        <argument>MainJavaFXScript=javafxyt.Main</argument>
+    </application-desc>
+    <update check="background">
+</jnlp>

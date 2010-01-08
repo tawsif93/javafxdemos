@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+<style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+<div align="left" class="java">
+    <table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+            <td nowrap="nowrap" valign="top" align="left">
+                <code>
+                    <font color="#3f7f5f">/*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Main.fx</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Created&nbsp;on&nbsp;18&nbsp;Jun,&nbsp;2009,&nbsp;1:14:12&nbsp;PM</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">rssatom;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.data.feed.rss.RssTask;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.animation.Timeline;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.animation.KeyFrame;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Scene;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.text.Font;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.text.Text;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.Stage;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.text.FontWeight;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.layout.HBox;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Color;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.LinearGradient;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Stop;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.shape.Rectangle;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.StageStyle;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">Rakesh&nbsp;Menon</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;itemGroup&nbsp;=&nbsp;HBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">5</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">spacing:&nbsp;</font><font color="#990000">50</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;bind&nbsp;items</font><br />
+                    <font color="#000000">}</font><font color="#000000">;</font><br />
+                    <font color="#000000">var&nbsp;itemGroupBounds&nbsp;=&nbsp;</font><font color="#990000">0.0</font><font color="#000000">;</font><br />
+                    <font color="#000000">var&nbsp;items&nbsp;:&nbsp;Text</font><font color="#000000">[]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;rssTask&nbsp;=&nbsp;RssTask&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">location:&nbsp;</font><font color="#2a00ff">&#34;http://rss.news.yahoo.com/rss/world&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">interval:&nbsp;</font><font color="#990000">300</font><font color="#000000">s</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onException:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">e.printStackTrace</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onChannel:&nbsp;function</font><font color="#000000">(</font><font color="#000000">channel</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">delete&nbsp;items;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">itemGroupBounds&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onItem:&nbsp;function</font><font color="#000000">(</font><font color="#000000">item</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">insert&nbsp;Text&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">font&nbsp;:&nbsp;Font.font</font><font color="#000000">(</font><font color="#2a00ff">&#34;dialog&#34;</font><font color="#000000">,&nbsp;FontWeight.BOLD,&nbsp;</font><font color="#990000">12</font><font color="#000000">)</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#2a00ff">&#34;{item.title}&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.WHITE</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#000000">into&nbsp;items;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">itemGroupBounds&nbsp;+=&nbsp;itemGroup.boundsInLocal.width;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#000000">rssTask.start</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;bgRect&nbsp;:&nbsp;Rectangle&nbsp;=&nbsp;Rectangle&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;bind&nbsp;scene.width</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;bind&nbsp;scene.height</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;LinearGradient&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">proportional:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">startX:&nbsp;</font><font color="#990000">0.0</font><font color="#000000">,&nbsp;startY:&nbsp;</font><font color="#990000">0.0</font><font color="#000000">,&nbsp;endX:&nbsp;</font><font color="#990000">0.0</font><font color="#000000">,&nbsp;endY:&nbsp;</font><font color="#990000">1.0</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">stops:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Stop&nbsp;</font><font color="#000000">{&nbsp;</font><font color="#000000">offset:&nbsp;</font><font color="#990000">0.0&nbsp;</font><font color="#000000">color:&nbsp;Color.GRAY&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Stop&nbsp;</font><font color="#000000">{&nbsp;</font><font color="#000000">offset:&nbsp;</font><font color="#990000">0.8&nbsp;</font><font color="#000000">color:&nbsp;Color.BLACK&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMouseDragged:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#2a00ff">&#34;{__PROFILE__}&#34;&nbsp;</font><font color="#000000">!=&nbsp;</font><font color="#2a00ff">&#34;browser&#34;</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">stage.x&nbsp;=&nbsp;stage.x&nbsp;+&nbsp;e.dragX;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">stage.y&nbsp;=&nbsp;stage.y&nbsp;+&nbsp;e.dragY;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;scene&nbsp;=&nbsp;Scene&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">400</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">40</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">bgRect,&nbsp;itemGroup&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;timeline&nbsp;:&nbsp;Timeline&nbsp;=&nbsp;Timeline&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">repeatCount:&nbsp;Timeline.INDEFINITE</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">keyFrames:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">KeyFrame&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">canSkip:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">time:&nbsp;</font><font color="#990000">40</font><font color="#000000">ms</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">action:&nbsp;function</font><font color="#000000">()&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">itemGroup.translateX&nbsp;-=&nbsp;</font><font color="#990000">1</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">itemGroup.translateX&nbsp;&lt;&nbsp;-itemGroupBounds</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">itemGroup.translateX&nbsp;=&nbsp;scene.width;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#000000">}</font><font color="#000000">;</font><br />
+                    <font color="#000000">timeline.play</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;stage&nbsp;=&nbsp;Stage&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">title:&nbsp;</font><font color="#2a00ff">&#34;RSS&nbsp;Ticker&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">scene:&nbsp;scene</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">resizable:&nbsp;</font><font color="#7f0055"><b>false</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">style:&nbsp;StageStyle.UNDECORATED</font><br />
+                    <font color="#000000">}</font>
+                </code>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

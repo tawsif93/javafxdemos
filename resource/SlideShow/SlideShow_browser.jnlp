@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/SlideShow/" href="SlideShow_browser.jnlp">
+  <information>
+    <title>SlideShow</title>
+    <vendor>rakesh</vendor>
+    <homepage href="http://javafxdemos.googlecode.com/hg/resource/SlideShow/"/>
+    <description>SlideShow</description>
+    <offline-allowed/>
+    <shortcut>
+      <desktop/>
+    </shortcut>
+  </information>
+  <resources>
+    <j2se version="1.5+"/>
+    <property name="jnlp.packEnabled" value="true"/>
+    <property name="jnlp.versionEnabled" value="true"/>
+    <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.1/javafx-rt.jnlp"/>
+    <jar href="SlideShow.jar" main="true"/>
+  </resources>
+  <applet-desc name="SlideShow" main-class="com.sun.javafx.runtime.adapter.Applet" width="500" height="420">
+    <param name="MainJavaFXScript" value="slideshow.Main"/>
+    <param name="java_version" value="1.5+"/>
+  </applet-desc>
+</jnlp>

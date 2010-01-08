@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/PanelLayout/" href="PanelLayout_browser.jnlp">
+    <information>
+        <title>PanelLayout</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href=""/>
+        <description>PanelLayout</description>
+        <offline-allowed/>
+        <shortcut>
+            <desktop/>
+        </shortcut>
+    </information>
+    <resources>
+        <j2se version="1.5+"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <property name="jnlp.versionEnabled" value="true"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="PanelLayout.jar" main="true"/>
+    </resources>
+    <applet-desc name="PanelLayout" main-class="com.sun.javafx.runtime.adapter.Applet" width="300" height="300">
+        <param name="MainJavaFXScript" value="panellayout.Main"/>
+    </applet-desc>
+    <update check="background"/>
+</jnlp>

@@ -1,0 +1,71 @@
+Scene {
+    fill: transparent;
+}
+
+.titleText {
+    font-size: 20pt;
+    font-family: "Bitstream Vera Sans";
+    font-weight: bold;
+    fill: #B63110;
+}
+
+.buttonText {
+    font-size: 11pt;
+    font-family: "Bitstream Vera Sans";
+    font-weight: bold;
+    fill: #FFE6D9;
+}
+.normalButton {
+    fill: #520902;
+    stroke: #AD7949;
+    strokeWidth: 2.0;
+    arcWidth: 10;
+    arcHeight: 10;
+}
+.selectedButton {
+    fill: #B63110;
+    stroke: #AD7949;
+    strokeWidth: 2.0;
+    arcWidth: 10;
+    arcHeight: 10;
+}
+
+.dataText {
+    font-size: 14pt;
+    font-family: "Bitstream Vera Sans";
+    font-weight: bold;
+}
+.normalDataCell {
+    fill: #FFCC66;
+    stroke: #CC6600;
+    strokeWidth: 1.5;
+}
+.selectedDataCell {
+    fill: #9B2300;
+    stroke: #FFFFFF;
+    strokeWidth: 1;
+    arcWidth: 5;
+    arcHeight: 5;
+}
+.errorDataCell {
+    fill: #FF6633;
+    arcWidth: 5;
+    arcHeight: 5;
+}
+
+.blockRectangle {
+    stroke: #D3B070;
+    strokeWidth: 4;
+}
+.blockLine {
+    stroke: #AD7949;
+    strokeWidth: 4;
+}
+
+.borderRectangle {
+    fill: #000000;
+    stroke: #D3B070;
+    strokeWidth: 4;
+    arcWidth: 20;
+    arcHeight: 20;
+}

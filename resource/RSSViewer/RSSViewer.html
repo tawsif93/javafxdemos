@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>RSS Viewer</title>
+</head>
+<body>
+<script src="http://dl.javafx.com/1.2/dtfx.js"></script>
+<table width="40%" border="1" cellpadding="10" cellspacing="0">
+<tbody><tr><td align="center">
+<script>
+    javafx(
+        {
+            archive: "http://javafx.com/samples/RSSViewer/webstart/RSSViewer.jar,",
+            width: 610,
+            height: 62,
+            code: "rssviewer.Main",
+            name: "RSSViewer"
+        } , { 
+            isApplet: "true", 
+            js_mode: "true", 
+            rss_url: "http://news.google.com/news?pz=1&ned=us&hl=en&topic=w&output=rss"
+        } 
+    );
+    function updateChannelData(channelData) {
+        document.getElementById("ChannelData").innerHTML = channelData;
+    }
+</script>
+<div id="ChannelData" style="text-align: center;"></div>
+</td></tr></tbody></table>
+</body>
+</html>

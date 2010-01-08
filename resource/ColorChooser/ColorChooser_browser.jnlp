@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/ColorChooser/" href="ColorChooser_browser.jnlp">
+    <information>
+        <title>ColorChooser</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href="http://javafxdemos.googlecode.com/hg/resource/ColorChooser/"/>
+        <description>ColorChooser</description>
+        <offline-allowed/>
+        <shortcut>
+            <desktop/>
+        </shortcut>
+    </information>
+    <resources>
+        <j2se version="1.5+"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <property name="jnlp.versionEnabled" value="true"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.1/javafx-rt.jnlp"/>
+        <jar href="ColorChooser.jar" main="true"/>
+    </resources>
+    <applet-desc name="ColorChooser" main-class="com.sun.javafx.runtime.adapter.Applet" width="454" height="108">
+        <param name="MainJavaFXScript" value="colorchooser.Main">
+    </applet-desc>
+</jnlp>

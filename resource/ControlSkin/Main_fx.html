@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title></title>
+<style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+<div align="left" class="java">
+    <table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+            <td nowrap="nowrap" valign="top" align="left">
+                <code>
+                    <font color="#3f7f5f">/*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Main.fx</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Created&nbsp;on&nbsp;10&nbsp;Jun,&nbsp;2009,&nbsp;10:18:39&nbsp;AM</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">controlskin;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">com.sun.javafx.scene.control.caspian.ButtonSkin;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">com.sun.javafx.scene.control.caspian.CheckBoxSkin;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">com.sun.javafx.scene.control.caspian.HyperlinkSkin;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">com.sun.javafx.scene.control.caspian.ListViewSkin;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">com.sun.javafx.scene.control.caspian.RadioButtonSkin;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">com.sun.javafx.scene.control.caspian.TextBoxSkin;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">com.sun.javafx.scene.control.caspian.ToggleButtonSkin;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.Button;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.CheckBox;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.Hyperlink;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.Label;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.ListView;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.RadioButton;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.TextBox;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.control.ToggleButton;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Group;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.layout.HBox;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Color;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Scene;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.shape.Rectangle;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.Stage;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.StageStyle;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">Rakesh&nbsp;Menon</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;index&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;skin&nbsp;:&nbsp;SkinPalette</font><font color="#000000">[]&nbsp;</font><font color="#000000">=&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">SkinPalette&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">palette:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#490A3D&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#BD1550&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#E97F02&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#F8CA00&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#8A9B0F&#34;</font><font color="#000000">)</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">SkinPalette&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">palette:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#CFF09E&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#A8DBA8&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#79BD9A&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#3B8686&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#0B486B&#34;</font><font color="#000000">)</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">SkinPalette&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">palette:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#FFEDBF&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#F7803C&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#F54828&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#2E0D23&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#F8E4C1&#34;</font><font color="#000000">)</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">SkinPalette&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">palette:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#A8AD8D&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#94947C&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#443838&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#E7A84B&#34;</font><font color="#000000">)</font><font color="#000000">,&nbsp;Color.web</font><font color="#000000">(</font><font color="#2a00ff">&#34;#FFCC5F&#34;</font><font color="#000000">)</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;button&nbsp;=&nbsp;Button&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;Button&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">skin:&nbsp;ButtonSkin&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">borderFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.borderFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">focusFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.focusFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">highlightFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.highlightFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">shadowFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.shadowFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.textFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.fill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;checkBox&nbsp;=&nbsp;CheckBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;CheckBox&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">skin:&nbsp;CheckBoxSkin&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">borderFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.borderFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">focusFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.focusFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">heightlightFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.highlightFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">shadowFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.shadowFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.textFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.fill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;radioButton&nbsp;=&nbsp;RadioButton&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;RadioButton&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">skin:&nbsp;RadioButtonSkin&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">borderFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.borderFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">focusFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.focusFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">heightlightFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.highlightFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.textFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.fill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;toggleButton&nbsp;=&nbsp;ToggleButton&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;ToggleButton&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">skin:&nbsp;ToggleButtonSkin&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">borderFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.borderFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">focusFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.focusFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">heightlightFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.highlightFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.textFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.fill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">shadowFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.shadowFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;hyperlink&nbsp;=&nbsp;Hyperlink&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;Hyperlink&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">skin:&nbsp;HyperlinkSkin&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.textFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">210</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;label&nbsp;=&nbsp;Label&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;Label&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.textFill</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;listView&nbsp;=&nbsp;ListView&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">items:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#2a00ff">&#34;Item&nbsp;1&#34;</font><font color="#000000">,&nbsp;</font><font color="#2a00ff">&#34;Item&nbsp;2&#34;</font><font color="#000000">,&nbsp;</font><font color="#2a00ff">&#34;Item&nbsp;3&#34;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">skin:&nbsp;ListViewSkin&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">backgroundFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.backgroundFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">alternateFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.alternateFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">borderFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.borderFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">focusFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.focusFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">shadowFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.shadowFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;</font><font color="#990000">150</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">150</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">30</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;textBox&nbsp;=&nbsp;TextBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;TextBox&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">skin:&nbsp;TextBoxSkin&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">backgroundFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.backgroundFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">borderFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.borderFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">caretFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.caretFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">focusFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.focusFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">highlightFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.highlightFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">promptTextFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.promptTextFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">selectedTextFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.selectedTextFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">shadowFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.shadowFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">textFill:&nbsp;bind&nbsp;skin</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">.textFill</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;updateButton&nbsp;=&nbsp;Button&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">text:&nbsp;</font><font color="#2a00ff">&#34;Update&nbsp;Skin&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">action:&nbsp;function</font><font color="#000000">()&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">index&nbsp;==&nbsp;</font><font color="#000000">((</font><font color="#000000">sizeof&nbsp;skin</font><font color="#000000">)&nbsp;</font><font color="#000000">-&nbsp;</font><font color="#990000">1</font><font color="#000000">))&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">index&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">index++;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//&nbsp;Workaround:&nbsp;ListView&nbsp;skin&nbsp;is&nbsp;not&nbsp;updated&nbsp;by&nbsp;default</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">listView.select</font><font color="#000000">(</font><font color="#990000">1</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">listView.select</font><font color="#000000">(</font><font color="#990000">0</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">270</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;view&nbsp;=&nbsp;Group&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">HBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">spacing:&nbsp;</font><font color="#990000">10</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">label,&nbsp;textBox&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">listView,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">HBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">spacing:&nbsp;</font><font color="#990000">10</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">checkBox,&nbsp;radioButton&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">190</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">hyperlink,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">HBox&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">spacing:&nbsp;</font><font color="#990000">10</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">button,&nbsp;toggleButton&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">230</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">updateButton</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;</font><font color="#990000">10</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#990000">10</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;bgRect&nbsp;:&nbsp;Rectangle&nbsp;=&nbsp;Rectangle&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">x:&nbsp;</font><font color="#990000">2</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">y:&nbsp;</font><font color="#990000">2</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;bind&nbsp;scene.width&nbsp;-&nbsp;</font><font color="#990000">4</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;bind&nbsp;scene.height&nbsp;-&nbsp;</font><font color="#990000">4</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">stroke:&nbsp;Color.ALICEBLUE</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.BEIGE</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;scene&nbsp;=&nbsp;Scene&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">bgRect,&nbsp;view&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">Stage&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">title:&nbsp;</font><font color="#2a00ff">&#34;Skin&nbsp;Controls&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">scene:&nbsp;scene</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">resizable:&nbsp;</font><font color="#7f0055"><b>false</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#3f7f5f">//style:&nbsp;StageStyle.UNDECORATED</font><br />
+                    <font color="#000000">}</font>
+                </code>    
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

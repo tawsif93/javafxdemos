@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/LoadImage/" href="LoadImage_browser.jnlp">
+    <information>
+        <title>LoadImage</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href="http://javafxdemos.googlecode.com/hg/resource/LoadImage/"/>
+        <description>LoadImage</description>
+        <offline-allowed/>
+        <shortcut>
+            <desktop/>
+        </shortcut>
+    </information>
+    <resources>
+        <j2se version="1.5+"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <property name="jnlp.versionEnabled" value="true"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.1/javafx-rt.jnlp"/>
+        <jar href="LoadImage.jar" main="true"/>
+    </resources>
+    <applet-desc name="LoadImage" main-class="com.sun.javafx.runtime.adapter.Applet" width="300" height="225">
+        <param name="MainJavaFXScript" value="loadimage.Main">
+    </applet-desc>
+</jnlp>

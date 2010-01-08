@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+<style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+<div align="left" class="java">
+    <table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+            <td nowrap="nowrap" valign="top" align="left">
+                <code>
+                    <font color="#3f7f5f">/*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Main.fx</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Created&nbsp;on&nbsp;2&nbsp;Mar,&nbsp;2009,&nbsp;8:49:22&nbsp;PM</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">slideshow;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.animation.KeyFrame;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.animation.Timeline;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.animation.transition.FadeTransition;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Group;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.image.Image;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.image.ImageView;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Color;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.LinearGradient;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Stop;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Scene;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.shape.Rectangle;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.Stage;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.StageStyle;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">slideshow.ImageButton;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">Rakesh&nbsp;Menon</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;slideURL&nbsp;=&nbsp;FX.getArgument</font><font color="#000000">(</font><font color="#2a00ff">&#34;slide_url&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#000000">var&nbsp;slideCount&nbsp;=&nbsp;</font><font color="#2a00ff">&#34;0{FX.getArgument(&#34;</font><font color="#000000">slide_count</font><font color="#2a00ff">&#34;)}&#34;</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;sceneWidth&nbsp;=&nbsp;</font><font color="#990000">500</font><font color="#000000">;</font><br />
+                    <font color="#000000">var&nbsp;sceneHeight&nbsp;=&nbsp;</font><font color="#990000">420</font><font color="#000000">;</font><br />
+                    <font color="#000000">var&nbsp;index&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br />
+                    <font color="#000000">var&nbsp;maxIndex&nbsp;=&nbsp;Integer.parseInt</font><font color="#000000">(</font><font color="#000000">slideCount</font><font color="#000000">)</font><font color="#000000">;</font><br />
+                    <font color="#000000">var&nbsp;defaultOrder&nbsp;=&nbsp;</font><font color="#7f0055"><b>true</b></font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">function&nbsp;getImage</font><font color="#000000">(</font><font color="#000000">i:Integer</font><font color="#000000">)&nbsp;</font><font color="#000000">:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">transTransition.stop</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">transTransition.playFromStart</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">var&nbsp;placeHolder&nbsp;=&nbsp;</font><font color="#2a00ff">&#34;placeholder&#34;</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">i&nbsp;==&nbsp;</font><font color="#990000">0</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">placeHolder&nbsp;=&nbsp;</font><font color="#2a00ff">&#34;splash&#34;</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{slideURL}/slide_{i}.jpg&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;sceneWidth</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;sceneHeight&nbsp;-&nbsp;</font><font color="#990000">45</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">backgroundLoading:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">placeholder:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/{placeHolder}.jpg&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;imageView:&nbsp;ImageView</font><font color="#000000">[]&nbsp;</font><font color="#000000">=&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ImageView&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">image:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/placeholder.jpg&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">ImageView&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">image:&nbsp;bind&nbsp;getImage</font><font color="#000000">(</font><font color="#000000">index</font><font color="#000000">)</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">smooth:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;transTransition&nbsp;=&nbsp;FadeTransition&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">node:&nbsp;bind&nbsp;imageView</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">duration:&nbsp;</font><font color="#990000">3</font><font color="#000000">s</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fromValue:&nbsp;</font><font color="#990000">0.0</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">toValue:&nbsp;</font><font color="#990000">1.0</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;slideShowTimeline&nbsp;=&nbsp;Timeline&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">repeatCount:&nbsp;Timeline.INDEFINITE</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">keyFrames:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">KeyFrame&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">time:&nbsp;</font><font color="#990000">10</font><font color="#000000">s</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">action:&nbsp;function</font><font color="#000000">()&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">index&nbsp;==&nbsp;maxIndex</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">index&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">index++;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;bgRect&nbsp;=&nbsp;Rectangle&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">x:&nbsp;</font><font color="#990000">0</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">y:&nbsp;sceneHeight&nbsp;-&nbsp;</font><font color="#990000">45</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;sceneWidth</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">45</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;LinearGradient&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">startX:&nbsp;</font><font color="#990000">0.5</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">startY:&nbsp;</font><font color="#990000">0.0</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">endX:&nbsp;</font><font color="#990000">0.5</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">endY:&nbsp;</font><font color="#990000">1.0</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">proportional:&nbsp;</font><font color="#7f0055"><b>true</b></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">stops:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Stop&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">offset:&nbsp;</font><font color="#990000">0.0</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">color:&nbsp;Color.GRAY</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Stop&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">offset:&nbsp;</font><font color="#990000">0.6</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">color:&nbsp;Color.BLACK</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;backButton&nbsp;=&nbsp;ImageButton&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">normalImage:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/back_n.png&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">hoverImage:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/back_h.png&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;</font><font color="#990000">10</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;sceneHeight&nbsp;-&nbsp;</font><font color="#990000">40</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">index&nbsp;==&nbsp;</font><font color="#990000">0</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">index&nbsp;=&nbsp;maxIndex;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">index--;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;nextButton&nbsp;=&nbsp;ImageButton&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">normalImage:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/next_n.png&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">hoverImage:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/next_h.png&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;sceneWidth&nbsp;-&nbsp;</font><font color="#990000">43</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;sceneHeight&nbsp;-&nbsp;</font><font color="#990000">40</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">index&nbsp;==&nbsp;maxIndex</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">index&nbsp;=&nbsp;</font><font color="#990000">0</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">index++;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;playImage&nbsp;=&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/play.png&#34;</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#000000">var&nbsp;pauseImage&nbsp;=&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/pause.png&#34;</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#000000">function&nbsp;getPlayImage</font><font color="#000000">(</font><font color="#000000">paused&nbsp;:&nbsp;Boolean</font><font color="#000000">)&nbsp;</font><font color="#000000">:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">paused</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">playImage;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>return&nbsp;</b></font><font color="#000000">pauseImage;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#000000">var&nbsp;playButton&nbsp;=&nbsp;ImageView&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">image:&nbsp;bind&nbsp;getPlayImage</font><font color="#000000">(</font><font color="#000000">slideShowTimeline.paused</font><font color="#000000">)</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;</font><font color="#000000">(</font><font color="#000000">sceneWidth&nbsp;-&nbsp;</font><font color="#990000">25</font><font color="#000000">)&nbsp;</font><font color="#000000">/&nbsp;</font><font color="#990000">2.0</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;</font><font color="#000000">(</font><font color="#000000">sceneHeight&nbsp;-&nbsp;</font><font color="#990000">33</font><font color="#000000">)</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">slideShowTimeline.paused</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">slideShowTimeline.play</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}&nbsp;</font><font color="#7f0055"><b>else&nbsp;</b></font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">slideShowTimeline.pause</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">Stage&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">title:&nbsp;</font><font color="#2a00ff">&#34;JavaFX&nbsp;Slide&nbsp;Show&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;sceneWidth</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;sceneHeight</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">scene:&nbsp;Scene&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;Group&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Group&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;imageView</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><font color="#000000">,&nbsp;bgRect,&nbsp;backButton,&nbsp;nextButton,&nbsp;playButton</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.BLACK</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">style:&nbsp;StageStyle.UNDECORATED</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#000000">slideShowTimeline.play</font><font color="#000000">()</font><font color="#000000">;</font></code>
+    
+            </td>
+    </table>
+</div>
+</body>
+</html>

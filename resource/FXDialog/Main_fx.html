@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<title></title>
+<style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+<div align="left" class="java">
+    <table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+            <td nowrap="nowrap" valign="top" align="left">
+                <code>
+                    <font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">calendar;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">calendar.theme.Theme;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">calendar.view.FXCalendar;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">fxdialog.FXDialogUtils;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.lang.FX;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.image.Image;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.image.ImageView;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Color;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.Scene;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.shape.Rectangle;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.Stage;</font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.stage.StageStyle;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f7f5f">//&nbsp;Default&nbsp;application&nbsp;bounds</font><br />
+                    <font color="#000000">var&nbsp;stageX&nbsp;=&nbsp;</font><font color="#990000">280.0</font><font color="#000000">;</font><br />
+                    <font color="#000000">var&nbsp;stageY&nbsp;=&nbsp;</font><font color="#990000">140.0</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;fxCalendar&nbsp;=&nbsp;FXCalendar&nbsp;</font><font color="#000000">{&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">theme:&nbsp;Theme&nbsp;</font><font color="#000000">{&nbsp;}</font><font color="#000000">;</font><br />
+                    <font color="#000000">}</font><font color="#000000">;</font><br />
+                    <font color="#3f7f5f">//&nbsp;Center&nbsp;align&nbsp;for&nbsp;Mobile</font><br />
+                    <font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#2a00ff">&#34;{__PROFILE__}&#34;&nbsp;</font><font color="#000000">==&nbsp;</font><font color="#2a00ff">&#34;mobile&#34;</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fxCalendar.translateX&nbsp;=&nbsp;</font><font color="#990000">9.5</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fxCalendar.translateY&nbsp;=&nbsp;</font><font color="#990000">35.5</font><font color="#000000">;</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f7f5f">//&nbsp;Drag&nbsp;Bar</font><br />
+                    <font color="#000000">var&nbsp;dragBar&nbsp;=&nbsp;Rectangle&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;fxCalendar.width</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;</font><font color="#990000">40</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.TRANSPARENT</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">visible:&nbsp;bind&nbsp;</font><font color="#000000">(</font><font color="#2a00ff">&#34;{__PROFILE__}&#34;&nbsp;</font><font color="#000000">!=&nbsp;</font><font color="#2a00ff">&#34;browser&#34;</font><font color="#000000">)</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMouseDragged:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">stageX&nbsp;+=&nbsp;e.dragX;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">stageY&nbsp;+=&nbsp;e.dragY;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">var&nbsp;closeButton&nbsp;=&nbsp;ImageView&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateX:&nbsp;fxCalendar.width&nbsp;-&nbsp;</font><font color="#990000">29</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">translateY:&nbsp;-</font><font color="#990000">8</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">image:&nbsp;Image&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">url:&nbsp;</font><font color="#2a00ff">&#34;{__DIR__}images/close.png&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">onMousePressed:&nbsp;function</font><font color="#000000">(</font><font color="#000000">e</font><font color="#000000">)&nbsp;{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">FX.exit</font><font color="#000000">()</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">FXDialogUtils&nbsp;</font><font color="#000000">{&nbsp;}</font><font color="#000000">;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#000000">Stage&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">x:&nbsp;bind&nbsp;stageX&nbsp;with&nbsp;inverse</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">y:&nbsp;bind&nbsp;stageY&nbsp;with&nbsp;inverse</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">width:&nbsp;fxCalendar.width</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">height:&nbsp;fxCalendar.height</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">title:&nbsp;</font><font color="#2a00ff">&#34;Calendar&#34;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">scene:&nbsp;Scene&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">content:&nbsp;</font><font color="#000000">[&nbsp;</font><font color="#000000">dragBar,&nbsp;fxCalendar,&nbsp;closeButton&nbsp;</font><font color="#000000">]</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">fill:&nbsp;Color.TRANSPARENT</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">style:&nbsp;StageStyle.TRANSPARENT</font><br />
+                    <font color="#000000">}</font><br />
+                    <font color="#000000">fxCalendar.requestFocus</font><font color="#000000">()</font><font color="#000000">;</font></code>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

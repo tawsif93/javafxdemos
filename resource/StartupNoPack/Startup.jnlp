@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/StartupNoPack/" href="Startup.jnlp">
+    <information>
+        <title>Startup - No Pack</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href="http://javafxdemos.googlecode.com/hg/resource/StartupNoPack/"/>
+        <description>Startup</description>
+        <offline-allowed/>
+    </information>
+    <resources>
+        <j2se version="1.5+"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="Startup.jar" main="true"/>
+    </resources>
+    <application-desc main-class="com.sun.javafx.runtime.main.Main">
+        <argument>MainJavaFXScript=startup.Main</argument>
+    </application-desc>
+    <update check="background">
+</jnlp>

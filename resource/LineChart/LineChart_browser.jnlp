@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/LineChart/" href="LineChart_browser.jnlp">
+    <information>
+        <title>LineChart</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href="http://javafxdemos.googlecode.com/hg/resource/LineChart/"/>
+        <description>LineChart</description>
+        <offline-allowed/>
+    </information>
+    <resources>
+        <j2se version="1.5+" initial-heap-size="64m" max-heap-size="256m"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <property name="jnlp.versionEnabled" value="true"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="LineChart.jar" main="true"/>
+    </resources>
+    <applet-desc name="LineChart" main-class="com.sun.javafx.runtime.adapter.Applet" width="420" height="320">
+        <param name="MainJavaFXScript" value="linechart.Main">
+    </applet-desc>
+    <update check="background">
+</jnlp>

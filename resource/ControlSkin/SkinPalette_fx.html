@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title></title>
+<style type="text/css">
+    <!--code { font-family: Courier New, Courier; font-size: 10pt; margin: 0px; }-->
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>
+<div align="left" class="java">
+    <table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+            <td nowrap="nowrap" valign="top" align="left">
+                <code>
+                    <font color="#3f7f5f">/*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;CustomSkin.fx</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*&nbsp;Created&nbsp;on&nbsp;10&nbsp;Jun,&nbsp;2009,&nbsp;10:21:11&nbsp;AM</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f7f5f">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>package&nbsp;</b></font><font color="#000000">controlskin;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javafx.scene.paint.Paint;</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#3f5fbf">/**</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*&nbsp;</font><font color="#7f9fbf">@author&nbsp;</font><font color="#3f5fbf">Rakesh&nbsp;Menon</font><br />
+                    <font color="#ffffff">&nbsp;</font><font color="#3f5fbf">*/</font><br />
+                    <font color="#ffffff"></font><br />
+                    <font color="#7f0055"><b>public&nbsp;class&nbsp;</b></font><font color="#000000">SkinPalette&nbsp;</font><font color="#000000">{</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-init&nbsp;var&nbsp;palette&nbsp;:&nbsp;Paint</font><font color="#000000">[]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;focusFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;shadowFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;borderFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">2</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;fill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">3</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;highlightFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">4</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;textFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">2</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;checkFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;backgroundFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">4</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;alternateFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">0</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;dotFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;promptTextFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;selectedTextFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>public</b></font><font color="#000000">-read&nbsp;var&nbsp;caretFill&nbsp;=&nbsp;palette</font><font color="#000000">[</font><font color="#990000">1</font><font color="#000000">]</font><font color="#000000">;</font><br />
+                    <font color="#000000">}</font>
+                </code>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

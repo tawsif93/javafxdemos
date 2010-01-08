@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/LazyLoader/" href="LazyLoader_browser.jnlp">
+    <information>
+        <title>LazyLoader</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href="http://javafxdemos.googlecode.com/hg/resource/LazyLoader/"/>
+        <description>LazyLoader</description>
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.5+"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <property name="jnlp.versionEnabled" value="true"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="LazyLoader.jar" main="true"/>
+    </resources>
+    <applet-desc name="LazyLoader" main-class="com.sun.javafx.runtime.adapter.Applet" width="490" height="340">
+        <param name="MainJavaFXScript" value="lazyloader.Main">
+    </applet-desc>
+    <update check="background">
+</jnlp>

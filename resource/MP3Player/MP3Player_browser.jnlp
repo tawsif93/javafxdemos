@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/MP3Player/" href="MP3Player_browser.jnlp">
+    <information>
+        <title>MP3Player</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href=""/>
+        <description>MP3Player</description>
+        <offline-allowed/>
+    </information>
+    <resources>
+        <j2se version="1.5+"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <property name="jnlp.versionEnabled" value="true"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="MP3Player.jar" main="true"/>
+    </resources>
+    <applet-desc name="MP3Player" main-class="com.sun.javafx.runtime.adapter.Applet" width="510" height="345">
+        <param name="MainJavaFXScript" value="mp3player.Main" />
+    </applet-desc>
+    <update check="background" />
+</jnlp>

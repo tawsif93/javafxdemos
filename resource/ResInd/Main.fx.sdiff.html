@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<!--
+   Note to customizers: the body of the webrev is IDed as SUNWwebrev
+   to allow easy overriding by users of webrev via the userContent.css
+   mechanism available in some browsers.
+
+   For example, to have all "removed" information be red instead of
+   brown, set a rule in your userContent.css file like:
+
+       body#SUNWwebrev span.removed { color: red ! important; }
+-->
+<style type="text/css" media="screen">
+body {
+    background-color: #eeeeee;
+}
+hr {
+    border: none 0;
+    border-top: 1px solid #aaa;
+    height: 1px;
+}
+div.summary {
+    font-size: .8em;
+    border-bottom: 1px solid #aaa;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+div.summary h2 {
+    margin-bottom: 0.3em;
+}
+div.summary table th {
+    text-align: right;
+    vertical-align: top;
+    white-space: nowrap;
+}
+span.lineschanged {
+    font-size: 0.7em;
+}
+span.oldmarker {
+    color: red;
+    font-size: large;
+    font-weight: bold;
+}
+span.newmarker {
+    color: green;
+    font-size: large;
+    font-weight: bold;
+}
+span.removed {
+    color: brown;
+}
+span.changed {
+    color: blue;
+}
+span.new {
+    color: blue;
+    font-weight: bold;
+}
+a.print { font-size: x-small; }
+
+</style>
+
+<style type="text/css" media="print">
+pre { font-size: 0.8em; font-family: courier, monospace; }
+span.removed { color: #444; font-style: italic }
+span.changed { font-weight: bold; }
+span.new { font-weight: bold; }
+span.newmarker { font-size: 1.2em; font-weight: bold; }
+span.oldmarker { font-size: 1.2em; font-weight: bold; }
+a.print {display: none}
+hr { border: none 0; border-top: 1px solid #aaa; height: 1px; }
+</style>
+
+<title>samples Sdiff BrickBreaker/src/brickbreaker </title>
+</head><body id="SUNWwebrev">
+<h2>BrickBreaker/src/brickbreaker/Main.fx</h2>
+<a class="print" href="javascript:print()">Print this page</a>
+<pre></pre>
+
+<table><tr valign="top">
+<td><pre>
+   1 package brickbreaker;
+   2 
+   3 import javafx.scene.*;
+   4 import javafx.stage.*;
+   5 import javafx.scene.paint.*;
+
+   6 
+   7 /**
+   8  * @author Pavel Porvatov
+   9  */
+  10 
+
+
+
+  11 // Instance of the MainFrame class
+  12 public var mainFrame: MainFrame;
+
+
+
+  13 
+  14 def IS_MOBILE = FX.getProperty("javafx.me.profiles") != null;
+  15 
+  16 function run(__ARGS__ : String[]) {
+
+  17     // Initialization should be the first
+  18     Config.initialize(IS_MOBILE);
+  19 
+
+
+
+
+
+
+
+
+  20     mainFrame = MainFrame {
+  21         title: "Brick Breaker"
+  22         resizable: false
+  23 
+  24         scene: Scene {
+  25             fill: Color.BLACK
+  26             width: Config.screenWidth
+  27             height: Config.screenHeight
+
+  28         }
+  29     }
+  30 }
+  31 
+  32 public class MainFrame extends Stage {
+  33     // Instance of splash (if exists)
+  34     var splash: Splash;
+  35 
+  36     // Instance of level (if exists)
+  37     var level: Level;
+  38 
+  39     // Number of lifes
+  40     public var lifeCount: Integer;
+  41 
+  42     // Current score
+  43     public var score: Integer;
+  44 
+  45     // Initializes game (lifes, scores etc)
+  46     public function startGame() {
+  47         lifeCount = 3;
+  48         score = 0;
+  49         state = 1;
+  50     }
+  51 
+  52     // Current state of the game. The next values are available
+  53     // 0 - Splash
+  54     // 1..Level.LEVEL_COUNT - Level
+  55     public var state: Integer = 0 on replace {
+  56         if (state &lt; 1 or state &gt; LevelData.getLevelsCount()) {
+  57             splash.stop();
+  58             level.stop();
+  59             
+  60             level = null;
+  61             splash = Splash {};
+  62 
+<span class="changed">  63             scene.content = [</span>
+  64                 splash
+  65             ];
+  66 
+  67             splash.start();
+  68         } else {
+  69             splash.stop();
+  70             level.stop();
+  71             
+  72             splash = null;
+  73             level = Level {
+  74                 levelNumber: state
+  75             }
+  76 
+<span class="changed">  77             scene.content = [</span>
+  78                 level
+  79             ];
+  80             
+  81             level.start();
+  82         }
+  83     };
+  84 }
+</pre></td><td><pre>
+   1 package brickbreaker;
+   2 
+   3 import javafx.scene.*;
+   4 import javafx.stage.*;
+   5 import javafx.scene.paint.*;
+<span class="new">   6 import javafx.scene.transform.Transform;</span>
+   7 
+   8 /**
+   9  * @author Pavel Porvatov
+  10  */
+  11 
+<span class="new">  12 var scaleW:Number = 1.0;</span>
+<span class="new">  13 var scaleH:Number = 1.0;</span>
+<span class="new">  14 </span>
+  15 // Instance of the MainFrame class
+  16 public var mainFrame: MainFrame;
+<span class="new">  17 public var content : Group = Group {</span>
+<span class="new">  18     transforms: bind Transform.scale(scaleW, scaleH)</span>
+<span class="new">  19 };</span>
+  20 
+  21 def IS_MOBILE = FX.getProperty("javafx.me.profiles") != null;
+  22 
+  23 function run(__ARGS__ : String[]) {
+<span class="new">  24     </span>
+  25     // Initialization should be the first
+  26     Config.initialize(IS_MOBILE);
+  27 
+<span class="new">  28     // Fit screen for mobile</span>
+<span class="new">  29     if("{__PROFILE__}" == "mobile") {</span>
+<span class="new">  30         var w = javafx.stage.Screen.primary.bounds.width;</span>
+<span class="new">  31         var h = javafx.stage.Screen.primary.bounds.height;</span>
+<span class="new">  32         scaleW = w/240.0;</span>
+<span class="new">  33         scaleH = h/320.0;</span>
+<span class="new">  34     }</span>
+<span class="new">  35     </span>
+  36     mainFrame = MainFrame {
+  37         title: "Brick Breaker"
+  38         resizable: false
+  39 
+  40         scene: Scene {
+  41             fill: Color.BLACK
+  42             width: Config.screenWidth
+  43             height: Config.screenHeight
+<span class="new">  44             content: content</span>
+  45         }
+  46     }
+  47 }
+  48 
+  49 public class MainFrame extends Stage {
+  50     // Instance of splash (if exists)
+  51     var splash: Splash;
+  52 
+  53     // Instance of level (if exists)
+  54     var level: Level;
+  55 
+  56     // Number of lifes
+  57     public var lifeCount: Integer;
+  58 
+  59     // Current score
+  60     public var score: Integer;
+  61 
+  62     // Initializes game (lifes, scores etc)
+  63     public function startGame() {
+  64         lifeCount = 3;
+  65         score = 0;
+  66         state = 1;
+  67     }
+  68 
+  69     // Current state of the game. The next values are available
+  70     // 0 - Splash
+  71     // 1..Level.LEVEL_COUNT - Level
+  72     public var state: Integer = 0 on replace {
+  73         if (state &lt; 1 or state &gt; LevelData.getLevelsCount()) {
+  74             splash.stop();
+  75             level.stop();
+  76             
+  77             level = null;
+  78             splash = Splash {};
+  79 
+<span class="changed">  80             content.content = [</span>
+  81                 splash
+  82             ];
+  83 
+  84             splash.start();
+  85         } else {
+  86             splash.stop();
+  87             level.stop();
+  88             
+  89             splash = null;
+  90             level = Level {
+  91                 levelNumber: state
+  92             }
+  93 
+<span class="changed">  94             content.content = [</span>
+  95                 level
+  96             ];
+  97             
+  98             level.start();
+  99         }
+ 100     };
+ 101 }
+</pre></td>
+</tr></table>
+</body></html>

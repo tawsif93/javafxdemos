@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/JavaFXJavaScript/" href="JavaFXJavaScript_browser.jnlp">
+    <information>
+        <title>JavaFXJavaScript</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href=""/>
+        <description>JavaFXJavaScript</description>
+        <offline-allowed/>
+        <shortcut>
+            <desktop/>
+        </shortcut>
+    </information>
+    <resources>
+        <j2se version="1.5+"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="JavaFXJavaScript.jar" main="true"/>
+    </resources>
+    <applet-desc name="JavaFXJavaScript" main-class="com.sun.javafx.runtime.adapter.Applet" width="200" height="200">
+        <param name="MainJavaFXScript" value="javafxjavascript.Main">
+    </applet-desc>
+    <update check="background">
+</jnlp>

@@ -1,0 +1,24 @@
+<jnlp spec="1.0+" codebase="http://javafx.com/samples/RSSViewer/webstart/" href="http://javafxdemos.googlecode.com/hg/resource/RSSViewer/RSSViewer.jnlp">
+  <information>
+    <title>RSSViewer</title>
+    <vendor>Sun Microsystems</vendor>
+    <homepage href="http://javafxdemos.googlecode.com/hg/"/>
+    <description>RSS Viewer</description>
+    <description kind="short">RSSViewer</description>
+    <offline-allowed/>
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <update check="timeout" policy="always"/>
+  <resources>
+    <java version="1.5+"/>
+    <jar href="http://javafx.com/samples/RSSViewer/webstart/RSSViewer.jar" download="eager" main="true"/>
+    <extension href="http://dl.javafx.com/1.2/javafx-rt.jnlp" name="JavaFX Runtime"/>
+  </resources>
+  <application-desc main-class="com.sun.javafx.runtime.main.Main">
+      <argument>MainJavaFXScript=rssviewer.Main</argument>
+      <argument>rss_url=http://news.google.com/news?pz=1&ned=us&hl=en&topic=w&output=rss</argument>
+  </application-desc>
+  <update check="background">
+</jnlp>

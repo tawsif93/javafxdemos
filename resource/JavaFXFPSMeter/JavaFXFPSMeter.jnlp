@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/JavaFXFPSMeter/" href="JavaFXFPSMeter.jnlp">
+    <information>
+        <title>JavaFXFPSMeter</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href="http://javafxdemos.googlecode.com/hg/resource/JavaFXFPSMeter/"/>
+        <description>JavaFXFPSMeter</description>
+        <offline-allowed/>
+    </information>
+    <resources>
+        <j2se version="1.6+"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="JavaFXFPSMeter.jar" main="true"/>
+    </resources>
+    <application-desc main-class="com.sun.javafx.runtime.main.Main">
+        <argument>MainJavaFXScript=javafxfpsmeter.Main</argument>
+    </application-desc>
+    <update check="background">
+</jnlp>

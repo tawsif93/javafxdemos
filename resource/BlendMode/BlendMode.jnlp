@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/BlendMode/" href="BlendMode.jnlp">
+    <information>
+        <title>BlendMode</title>
+        <vendor>${application.vendor}</vendor>
+        <homepage href="http://javafxdemos.googlecode.com/hg/"/>
+        <description>BlendMode</description>
+        <offline-allowed/>
+        <shortcut>
+            <desktop/>
+        </shortcut>
+    </information>
+    <resources>
+        <j2se version="1.5+"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.1/javafx-rt.jnlp"/>
+        <jar href="BlendMode.jar" main="true"/>
+    </resources>
+    <application-desc main-class="blendmode.Main">
+    </application-desc>
+</jnlp>

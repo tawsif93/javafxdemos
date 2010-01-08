@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/SystemMonitor/" href="SystemMonitor_browser.jnlp">
+    <information>
+        <title>SystemMonitor</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href=""/>
+        <description>SystemMonitor</description>
+        <offline-allowed/>
+        <shortcut>
+            <desktop/>
+        </shortcut>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.5+" initial-heap-size="64m" max-heap-size="128m"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <property name="jnlp.versionEnabled" value="true"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="SystemMonitor.jar" main="true"/>
+    </resources>
+    <applet-desc name="SystemMonitor" main-class="com.sun.javafx.runtime.adapter.Applet" width="420" height="640">
+        <param name="MainJavaFXScript" value="systemmonitor.Main">
+    </applet-desc>
+    <update check="background">
+</jnlp>

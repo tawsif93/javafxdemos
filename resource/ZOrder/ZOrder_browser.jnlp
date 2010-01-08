@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/ZOrder/" href="ZOrder_browser.jnlp">
+    <information>
+        <title>ZOrder</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href=""/>
+        <description>ZOrder</description>
+        <offline-allowed/>
+        <shortcut>
+            <desktop/>
+        </shortcut>
+    </information>
+    <resources>
+        <j2se version="1.5+"/>
+        <extension name="JavaFX Runtime" href="http://dl.javafx.com/1.2/javafx-rt.jnlp"/>
+        <jar href="ZOrder.jar" main="true"/>
+    </resources>
+    <applet-desc name="ZOrder" main-class="com.sun.javafx.runtime.adapter.Applet" width="200" height="200">
+        <param name="MainJavaFXScript" value="zorder.Main"/>
+    </applet-desc>
+    <update check="background">
+</jnlp>
