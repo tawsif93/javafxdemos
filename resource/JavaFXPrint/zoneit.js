@@ -1,7 +1,7 @@
 (function() {
 var write_string = '<iframe src="http://widgets.dzone.com/links/widgets/zoneit.html?t=';
 write_string += window.dzone_style ? window.dzone_style : '1';
-write_string += '&url=http://blogs.sun.com/rakeshmenonp/en_US/entry/javafx_printing';
+write_string += '&url=http://blogs.sun.com/rakeshmenonp/entry/javafx_printing';
 if (window.dzone_title) write_string += '&title=' + encodeURIComponent(dzone_title);
 else  write_string += '&title=' + encodeURIComponent(document.title);
 if (window.dzone_blurb) write_string += '&description=' + encodeURIComponent(dzone_blurb);
