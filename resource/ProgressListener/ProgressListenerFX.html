@@ -22,7 +22,8 @@
     
     // Hide default splash screen if java version is 1.6.0_18
     var javaVersion = dtfxObject.getJavaVersion();
-    if(javaVersion == "1.6.0_18") {
+    var browser = dtfxObject.getBrowser();
+    if((javaVersion == "1.6.0_18") || (browser == "MSIE")) {
         hideOverlay("deployJavaApplet1");
     }
     
