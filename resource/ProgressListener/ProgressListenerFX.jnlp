@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/ProgressListener/" href="ProgressListenerFX.jnlp">
+    <information>
+        <title>ProgressListenerFX</title>
+        <vendor>Rakesh Menon</vendor>
+        <homepage href="http://javafxdemos.googlecode.com/hg/resource/ProgressListener/"/>
+        <description>ProgressListenerFX</description>
+        <offline-allowed/>
+    </information>
+    <update check="background" policy="always"/>
+    <resources>
+        <java version="1.6+"/>
+        <jar href="ProgressListener.jar" download="progress" name="ProgressListener"/>
+        <jar href="ProgressListenerFX.jar" main="true"/>
+        <extension href="http://dl.javafx.com/1.2/javafx-rt.jnlp" name="JavaFX Runtime"/>
+    </resources>
+    <application-desc main-class="com.sun.javafx.runtime.main.Main" progress-class="deployment.ProgressListener">
+        <argument>MainJavaFXScript=progresslistenerfx.Main</argument>
+    </application-desc>
+</jnlp>

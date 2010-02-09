@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ProgressListener FX</title>
+</head>
+<body>
+<script src="http://dl.javafx.com/1.2/dtfx.js"></script>
+<script>
+    
+    javafx(
+        {
+            archive: "ProgressListenerFX.jar",
+            width: 240,
+            height: 320,
+            code: "progresslistenerfx.Main",
+            draggable: true,
+            loading_image_url: "splash.jpg",
+            loading_image_width: 240,
+            loading_image_height: 320
+        } 
+    );
+    
+    // Hide default splash screen if java version is 1.6.0_18
+    var javaVersion = dtfxObject.getJavaVersion();
+    if(javaVersion == "1.6.0_18") {
+        hideOverlay("deployJavaApplet1");
+    }
+    
+</script>
+</body>
+</html>

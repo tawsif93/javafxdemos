@@ -82,7 +82,7 @@ public class ProgressView extends JComponent {
         try {
 
             bgImage = Toolkit.getDefaultToolkit().getImage(
-                getClass().getResource("/deployment/images/bg.png"));
+                getClass().getResource("/deployment/images/bg.jpg"));
             MediaTracker mt = new MediaTracker(this);
             mt.addImage(bgImage, 0);
             mt.waitForID(0);
