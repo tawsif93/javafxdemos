@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model modelID="fxc" modelVersion="40" rootInstance="DesignModel1" version="1">
+    <Instance classID="DesignModel" instanceID="DesignModel1">
+        <List name="stateVariables">
+            <Item value="inst:StateVariableModel1"/>
+        </List>
+        <List name="resources">
+            <Item value="inst:LinearGradientModel1"/>
+            <Item value="inst:FontModel1"/>
+            <Item value="inst:ImageModel1"/>
+        </List>
+        <List name="dataSources"/>
+        <List name="effects"/>
+        <Reference name="scene" value="inst:SceneModel1"/>
+        <Reference name="designWidth" value="flt:480.0"/>
+        <Reference name="designHeight" value="flt:320.0"/>
+        <Reference name="designProfile" value="profile:DESKTOP"/>
+        <Reference name="synchronizeDeviceAndSceneSizes" value="bool:true"/>
+    </Instance>
+    <Instance classID="StateVariableModel" instanceID="StateVariableModel1">
+        <Reference name="instanceName" value="str:currentState"/>
+        <List name="states"/>
+        <Reference name="startState" value="null"/>
+        <Reference name="stateChangeType" value="statechange:PAUSE_AND_PLAY_FROM_START"/>
+        <Reference name="defaultInterpolator" value="interpolator:DISCRETE"/>
+        <Reference name="defaultDuration" value="int:0"/>
+    </Instance>
+    <Instance classID="LinearGradientModel" instanceID="LinearGradientModel1">
+        <Reference name="instanceName" value="str:linearGradient"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="endX" value="prop:14,anim:,,flt:0.0,"/>
+        <Reference name="startY" value="prop:14,anim:,,flt:0.0,"/>
+        <Reference name="stops" value="prop:70,anim:,,sequence:24,gradientstop:0.0,#9DBEEF24,gradientstop:1.0,#2F73D3,"/>
+    </Instance>
+    <Instance classID="FontModel" instanceID="FontModel1">
+        <Reference name="instanceName" value="str:tempFont"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="autoKern" value="prop:17,anim:,,bool:false,"/>
+        <Reference name="embolden" value="prop:17,anim:,,bool:false,"/>
+        <Reference name="ligatures" value="prop:17,anim:,,bool:false,"/>
+        <Reference name="name" value="prop:20,anim:,,str:sansserif,"/>
+        <Reference name="oblique" value="prop:17,anim:,,bool:false,"/>
+        <Reference name="size" value="prop:15,anim:,,flt:40.0,"/>
+    </Instance>
+    <Instance classID="ImageModel" instanceID="ImageModel1">
+        <Reference name="instanceName" value="str:closeImage"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="url" value="prop:31,animcode:,,&quot;{__DIR__}close.gif&quot;,"/>
+    </Instance>
+    <Instance classID="SceneModel" instanceID="SceneModel1">
+        <Reference name="instanceName" value="str:scene"/>
+        <List name="nodes">
+            <Item value="inst:RectangleShapeModel1"/>
+            <Item value="inst:LabelModel1"/>
+            <Item value="inst:LabelModel2"/>
+            <Item value="inst:ImageViewModel1"/>
+            <Item value="inst:ImageViewModel2"/>
+            <Item value="inst:TextBoxModel1"/>
+        </List>
+        <Reference name="width" value="prop:16,anim:,,flt:256.0,"/>
+        <Reference name="height" value="prop:16,anim:,,flt:129.0,"/>
+        <Reference name="fill" value="prop:47,animcode:,,javafx.scene.paint.Color.TRANSPARENT,4,null,"/>
+        <Reference name="generateSceneInstance" value="bool:true"/>
+        <Reference name="generateScenePanel" value="bool:true"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="preInitCode" value="null"/>
+        <Reference name="postInitCode" value="null"/>
+    </Instance>
+    <Instance classID="RectangleShapeModel" instanceID="RectangleShapeModel1">
+        <Reference name="instanceName" value="str:background"/>
+        <Reference name="opacity" value="prop:14,anim:,,flt:1.0,4,null,"/>
+        <Reference name="cursor" value="prop:18,anim:,,cursor:HAND,4,null,"/>
+        <Reference name="layoutX" value="prop:15,anim:,,flt:60.0,4,null,"/>
+        <Reference name="layoutY" value="prop:15,anim:,,flt:56.0,4,null,"/>
+        <Reference name="onMouseClicked" value="prop:34,anim:,,str:rectangleOnMouseClicked,4,null,"/>
+        <Reference name="onMouseDragged" value="prop:34,anim:,,str:rectangleOnMouseDragged,4,null,"/>
+        <Reference name="onMousePressed" value="prop:34,anim:,,str:rectangleOnMousePressed,4,null,"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="fill" value="prop:32,anim:,,inst:LinearGradientModel1,4,null,"/>
+        <Reference name="stroke" value="prop:31,animcode:,,Color.web(&quot;#4882D2&quot;),4,null,"/>
+        <Reference name="width" value="prop:16,anim:,,flt:190.0,4,null,"/>
+        <Reference name="height" value="prop:15,anim:,,flt:67.0,4,null,"/>
+        <Reference name="arcWidth" value="prop:15,anim:,,flt:10.0,4,null,"/>
+        <Reference name="arcHeight" value="prop:15,anim:,,flt:10.0,4,null,"/>
+    </Instance>
+    <Instance classID="LabelModel" instanceID="LabelModel1">
+        <Reference name="instanceName" value="str:tempLabel"/>
+        <Reference name="layoutX" value="prop:16,anim:,,flt:157.0,4,null,"/>
+        <Reference name="layoutY" value="prop:15,anim:,,flt:60.0,4,null,"/>
+        <Reference name="layoutInfoWidth" value="prop:15,anim:,,flt:89.0,4,null,"/>
+        <Reference name="layoutInfoHeight" value="prop:15,anim:,,flt:34.0,4,null,"/>
+        <Reference name="layoutInfoHPos" value="prop:17,anim:,,hpos:RIGHT,4,null,"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="graphicNode" value="null"/>
+        <Reference name="text" value="prop:bind:bind &quot;{weatherInfo.conditionTemp}\u00B0&quot;"/>
+        <Reference name="font" value="prop:22,anim:,,inst:FontModel1,4,null,"/>
+        <Reference name="textAlignment" value="prop:22,anim:,,textalign:RIGHT,4,null,"/>
+        <Reference name="hpos" value="prop:17,anim:,,hpos:RIGHT,4,null,"/>
+        <Reference name="textFill" value="prop:22,animcode:,,Color.WHITE,4,null,"/>
+    </Instance>
+    <Instance classID="LabelModel" instanceID="LabelModel2">
+        <Reference name="instanceName" value="str:cityLabel"/>
+        <Reference name="layoutX" value="prop:15,anim:,,flt:65.0,4,null,"/>
+        <Reference name="layoutY" value="prop:16,anim:,,flt:106.0,4,null,"/>
+        <Reference name="layoutInfoWidth" value="prop:16,anim:,,flt:175.0,4,null,"/>
+        <Reference name="layoutInfoHeight" value="prop:15,anim:,,flt:15.0,4,null,"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="graphicNode" value="null"/>
+        <Reference name="text" value="prop:bind:bind &quot;{weatherInfo.locationCity}&quot;"/>
+        <Reference name="textAlignment" value="prop:22,anim:,,textalign:RIGHT,4,null,"/>
+        <Reference name="textWrap" value="prop:16,anim:,,bool:true,4,null,"/>
+        <Reference name="hpos" value="prop:17,anim:,,hpos:RIGHT,4,null,"/>
+        <Reference name="textFill" value="prop:22,animcode:,,Color.WHITE,4,null,"/>
+    </Instance>
+    <Instance classID="ImageViewModel" instanceID="ImageViewModel1">
+        <Reference name="instanceName" value="str:tempImageView"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="image" value="prop:bind:bind getImage(weatherInfo.conditionCode)"/>
+    </Instance>
+    <Instance classID="ImageViewModel" instanceID="ImageViewModel2">
+        <Reference name="instanceName" value="str:closeImageView"/>
+        <Reference name="visible" value="prop:bind:bind closeButtonVisible"/>
+        <Reference name="cursor" value="prop:18,anim:,,cursor:HAND,4,null,"/>
+        <Reference name="layoutX" value="prop:16,anim:,,flt:232.0,4,null,"/>
+        <Reference name="layoutY" value="prop:15,anim:,,flt:42.0,4,null,"/>
+        <Reference name="onMouseClicked" value="prop:39,anim:,,str:closeImageViewOnMouseClicked,4,null,"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="image" value="prop:23,anim:,,inst:ImageModel1,4,null,"/>
+    </Instance>
+    <Instance classID="TextBoxModel" instanceID="TextBoxModel1">
+        <Reference name="instanceName" value="str:cityText"/>
+        <Reference name="visible" value="prop:17,anim:,,bool:false,4,null,"/>
+        <Reference name="layoutX" value="prop:15,anim:,,flt:67.0,4,null,"/>
+        <Reference name="layoutY" value="prop:15,anim:,,flt:77.0,4,null,"/>
+        <Reference name="layoutInfoWidth" value="prop:16,anim:,,flt:173.0,4,null,"/>
+        <Reference name="layoutInfoHeight" value="prop:15,anim:,,flt:23.0,4,null,"/>
+        <Reference name="preCreationCode" value="null"/>
+        <Reference name="postCreationCode" value="null"/>
+        <Reference name="promptText" value="prop:15,anim:,,str:City,4,null,"/>
+        <Reference name="text" value="prop:20,anim:,,str:Bangalore,4,null,"/>
+        <Reference name="action" value="prop:25,anim:,,str:cityTextAction,4,null,"/>
+    </Instance>
+</Model>
