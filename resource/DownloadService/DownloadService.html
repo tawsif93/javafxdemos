@@ -1,0 +1,54 @@
+<html>
+
+<script src="http://www.java.com/js/deployJava.js"></script>
+<script src="http://dl.javafx.com/1.1/dtfx.js"></script>
+
+<table style="font-family: monospace;" border="0" cellpadding="5" cellspacing="2" width="400">
+<tbody>    
+    <tr>
+        <td colspan="2" bgcolor="#cccccc"><b>Environment</b></td>
+    </tr>
+    <tr>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><b>Java Version</b></td>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><div id="javaVersion">unknown</div></td>
+    </tr>
+    <tr>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><b>JavaFX Version</b></td>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><div id="javafx">unknown</div></td>
+    </tr>
+    <tr>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><b>OS</b></td>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><div id="os">unknown</div></td>
+    </tr>
+    <tr>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><b>Browser Family</b></td>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><div id="browserFamily">unknown</div></td>
+    </tr>
+    <tr>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><b>Browser</b></td>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><div id="browser">unknown</div></td>
+    </tr>
+    <tr>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><b>JRE 1.5+</b></td>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><div id="jre5">unknown</div></td>
+    </tr>
+    <tr>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><b>JRE 1.6+</b></td>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><div id="jre6">unknown</div></td>
+    </tr>
+</tbody>
+</table>
+
+<script>
+    document.getElementById("javaVersion").innerHTML = dtfxObject.getJavaVersion();
+    document.getElementById("os").innerHTML = dtfxObject.getSystemOS();
+    document.getElementById("browserFamily").innerHTML = deployJava.getBrowser();
+    document.getElementById("browser").innerHTML = deployJava.browserName2;
+    document.getElementById("jre5").innerHTML = ("" + deployJava.versionCheck('1.5+')).toUpperCase();
+    document.getElementById("jre6").innerHTML = ("" + deployJava.versionCheck('1.6+')).toUpperCase();
+    if (deployJava.versionCheck('1.6+') && (dtfxObject.getSystemOS() == "Windows")) {
+        document.getElementById("javafx").innerHTML = 
+            "<applet width=\"150\" height=\"15\"><param name=\"jnlp_href\" value=\"DownloadService.jnlp\"/></applet>";
+    }
+</script>
+</html>

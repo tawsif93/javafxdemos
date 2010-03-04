@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp codebase="http://javafxdemos.googlecode.com/hg/resource/DownloadService/" href="DownloadService.jnlp" spec="1.0+">
+  
+  <information>
+    <title>DownloadService</title>
+    <vendor>Rakesh Menon</vendor>
+    <homepage href=""/>
+    <description>DownloadService</description>
+    <description kind="short">DownloadService</description>
+  </information>
+
+  <resources>
+    <j2se version="1.5+"/>
+    <jar eager="true" href="DownloadService.jar" main="true"/>
+  </resources>
+  
+  <applet-desc height="300" main-class="downloadservice.DownloadServiceApplet" name="DownloadService" width="300">
+  </applet-desc>
+  
+</jnlp>
