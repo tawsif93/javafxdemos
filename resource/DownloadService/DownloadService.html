@@ -14,7 +14,18 @@
     </tr>
     <tr>
         <td bgcolor="#f0f0f0" style="white-space: nowrap;"><b>JavaFX Version</b></td>
-        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><div id="javafx">unknown</div></td>
+        <td bgcolor="#f0f0f0" style="white-space: nowrap;"><div id="javaFXVersion"></div>
+            <script>
+                if (deployJava.versionCheck('1.6+') && (dtfxObject.getSystemOS() == "Windows")) {
+                    var attributes = {code:'downloadservice.DownloadService.class', archive:'DownloadService.jar', width:150, height:15} ;
+                    var parameters = {jnlp_href:'DownloadService.jnlp'} ;
+	            var minimumVersion = '1.6.0' ;
+	            deployJava.runApplet(attributes, parameters, minimumVersion);
+                } else {
+                    document.getElementById("javaFXVersion").innerHTML = "-";
+                }
+            </script>
+        </td>
     </tr>
     <tr>
         <td bgcolor="#f0f0f0" style="white-space: nowrap;"><b>OS</b></td>
@@ -46,9 +57,5 @@
     document.getElementById("browser").innerHTML = deployJava.browserName2;
     document.getElementById("jre5").innerHTML = ("" + deployJava.versionCheck('1.5+')).toUpperCase();
     document.getElementById("jre6").innerHTML = ("" + deployJava.versionCheck('1.6+')).toUpperCase();
-    if (deployJava.versionCheck('1.6+') && (dtfxObject.getSystemOS() == "Windows")) {
-        document.getElementById("javafx").innerHTML = 
-            "<applet width=\"150\" height=\"15\"><param name=\"jnlp_href\" value=\"DownloadService.jnlp\"/></applet>";
-    }
 </script>
 </html>
