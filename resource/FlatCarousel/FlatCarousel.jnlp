@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/DragNDrop/" href="FlatCarousel.jnlp">
+<jnlp spec="1.0+" codebase="http://javafxdemos.googlecode.com/hg/resource/FlatCarousel/" href="FlatCarousel.jnlp">
     <information>
         <title>FlatCarousel</title>
         <vendor>Rakesh Menon</vendor>
