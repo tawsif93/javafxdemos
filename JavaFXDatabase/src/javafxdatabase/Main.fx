@@ -26,7 +26,14 @@ import javafxdatabase.modal.Customer;
 // Print Apache Derby Information
 //org.apache.derby.tools.sysinfo.main(null);
 
-public-read def inputForm = InputForm { };
+public-read def inputForm = InputForm {
+    layoutInfo: LayoutInfo {
+        width: 320
+        height: 420
+    }
+    width: 320
+    height: 420
+};
 public-read def inputFormWindow = Window {
     x: 10
     y: 60

@@ -6,8 +6,6 @@
 
 package javafxdatabase.view;
 
-import javafx.scene.CustomNode;
-import javafx.scene.Node;
 import javafx.scene.layout.Panel;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextBox;
@@ -15,12 +13,13 @@ import javafx.scene.control.Button;
 import javafxdatabase.modal.Customer;
 import javafxdatabase.Main;
 import javafx.stage.Alert;
+import javafx.scene.layout.Container;
 
 /**
  * @author Rakesh Menon
  */
 
-public class InputForm extends CustomNode {
+public class InputForm extends Container {
 
     public var customer : Customer on replace {
         if(customer != null) {
@@ -56,7 +55,7 @@ public class InputForm extends CustomNode {
     var cityLabel = Label { text: "City" };
     var cityText = TextBox { columns: 15 };
     var stateLabel = Label { text: "State" };
-    var stateText = TextBox { columns: 2 };
+    var stateText = TextBox { columns: 3 };
     var zipLabel = Label { text: "Zip" };
     var zipText = TextBox { columns: 10 };
     var phoneLabel = Label { text: "Phone" };
@@ -107,29 +106,26 @@ public class InputForm extends CustomNode {
         }
     }
 
-    override function create() : Node {
+    init {
 
         customer = new Customer();
         
-        panel = Panel {
-            content: [
-                idLabel, idText,
-                nameLabel, nameText,
-                addressLabel, address1Text, address2Text,
-                cityLabel, cityText,
-                stateLabel, stateText,
-                zipLabel, zipText,
-                phoneLabel, phoneText,
-                emailLabel, emailText,
-                creditLimitLabel, creditLimitText,
-                saveButton, cancelButton
-            ]
-            onLayout: onLayout
-        }
+        content = [
+            idLabel, idText,
+            nameLabel, nameText,
+            addressLabel, address1Text, address2Text,
+            cityLabel, cityText,
+            stateLabel, stateText,
+            zipLabel, zipText,
+            phoneLabel, phoneText,
+            emailLabel, emailText,
+            creditLimitLabel, creditLimitText,
+            saveButton, cancelButton
+        ];
     }
 
     var performLayout = true;
-    function onLayout() : Void {
+    override function doLayout() : Void {
 
         if(not performLayout) { return; }
         performLayout = false;
@@ -140,100 +136,101 @@ public class InputForm extends CustomNode {
         var gridH = 25.0;
 
         idLabel.height = gridH;
-        var x = (paddingLeft + gridW) - idLabel.layoutBounds.width;
+        var w = panel.getNodePrefWidth(idLabel);
+        var x = (paddingLeft + gridW) - w;
         var y = paddingTop;
-        var w = idLabel.layoutBounds.width;
         var h = gridH;
         panel.layoutNode(idLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
-        w = idText.width;
+        w = panel.getNodePrefWidth(idText);
         panel.layoutNode(idText, x, y, w, h);
 
-        x = (paddingLeft + gridW) - nameLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(nameLabel);
+        x = (paddingLeft + gridW) - w;
         y = idLabel.layoutY + gridH + vSpacing;
-        w = nameLabel.layoutBounds.width;
         panel.layoutNode(nameLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
-        w = nameText.width;
+        w = panel.getNodePrefWidth(nameText);
         panel.layoutNode(nameText, x, y, w, h);
 
-        x = (paddingLeft + gridW) - addressLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(addressLabel);
+        x = (paddingLeft + gridW) - w;
         y = nameLabel.layoutY + gridH + vSpacing;
-        w = addressLabel.layoutBounds.width;
         panel.layoutNode(addressLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
         y = addressLabel.layoutY;
-        w = address1Text.width;
+        w = panel.getNodePrefWidth(address1Text);
         panel.layoutNode(address1Text, x, y, w, h);
 
         y = address1Text.layoutY + gridH + vSpacing;
-        w = address2Text.width;
+        w = panel.getNodePrefWidth(address2Text);
         panel.layoutNode(address2Text, x, y, w, h);
-        
-        x = (paddingLeft + gridW) - cityLabel.layoutBounds.width;
+
+        w = panel.getNodePrefWidth(cityLabel);
+        x = (paddingLeft + gridW) - w;
         y = address2Text.layoutY + gridH + vSpacing;
-        w = cityLabel.layoutBounds.width;
         panel.layoutNode(cityLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
-        w = cityText.width;
+        w = panel.getNodePrefWidth(cityText);
         panel.layoutNode(cityText, x, y, w, h);
 
-        x = (paddingLeft + gridW) - stateLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(stateLabel);
+        x = (paddingLeft + gridW) - w;
         y = cityLabel.layoutY + gridH + vSpacing;
-        w = stateLabel.layoutBounds.width;
         panel.layoutNode(stateLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
-        w = stateText.width;
+        w = panel.getNodePrefWidth(stateText);
         panel.layoutNode(stateText, x, y, w, h);
 
-        x = (paddingLeft + gridW) - zipLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(zipLabel);
+        x = (paddingLeft + gridW) - w;
         y = stateLabel.layoutY + gridH + vSpacing;
-        w = zipLabel.layoutBounds.width;
         panel.layoutNode(zipLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
-        w = zipText.width;
+        w = panel.getNodePrefWidth(zipText);
         panel.layoutNode(zipText, x, y, w, h);
 
-        x = (paddingLeft + gridW) - phoneLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(phoneLabel);
+        x = (paddingLeft + gridW) - w;
         y = zipLabel.layoutY + gridH + vSpacing;
-        w = phoneLabel.layoutBounds.width;
         panel.layoutNode(phoneLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
-        w = phoneText.width;
+        w = panel.getNodePrefWidth(phoneText);
         panel.layoutNode(phoneText, x, y, w, h);
 
-        x = (paddingLeft + gridW) - emailLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(emailLabel);
+        x = (paddingLeft + gridW) - w;
         y = phoneLabel.layoutY + gridH + vSpacing;
-        w = emailLabel.layoutBounds.width;
         panel.layoutNode(emailLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
-        w = emailText.width;
+        w = panel.getNodePrefWidth(emailText);
         panel.layoutNode(emailText, x, y, w, h);
-        
-        x = (paddingLeft + gridW) - creditLimitLabel.layoutBounds.width;
+
+        w = panel.getNodePrefWidth(creditLimitLabel);
+        x = (paddingLeft + gridW) - w;
         y = emailLabel.layoutY + gridH + vSpacing;
-        w = creditLimitLabel.layoutBounds.width;
         panel.layoutNode(creditLimitLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
-        w = creditLimitText.width;
+        w = panel.getNodePrefWidth(creditLimitText);
         panel.layoutNode(creditLimitText, x, y, w, h);
 
-        var buttonPanelWidth = (saveButton.width * 2) + hSpacing;
-        x = (panel.boundsInLocal.width - buttonPanelWidth)/2.0;
+        w = panel.getNodePrefWidth(cancelButton);
+        var buttonPanelWidth = (w * 2) + hSpacing;
+        x = (width - buttonPanelWidth)/2.0;
         y = creditLimitLabel.layoutY + (gridH * 2);
-        w = saveButton.width;
+        
         panel.layoutNode(saveButton, x, y, w, h);
 
-        x = saveButton.layoutX + hSpacing + saveButton.layoutBounds.width;
+        x = saveButton.layoutX + hSpacing + w;
         panel.layoutNode(cancelButton, x, y, w, h);
     }
 }
