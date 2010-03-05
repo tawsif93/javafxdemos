@@ -76,9 +76,9 @@ public class InputForm extends CustomNode {
         var gridH = 25.0;
 
         idLabel.height = gridH;
-        var x = (paddingLeft + gridW) - idLabel.layoutBounds.width;
+        var w = panel.getNodePrefWidth(idLabel);
+        var x = (paddingLeft + gridW) - w;
         var y = paddingTop;
-        var w = idLabel.layoutBounds.width;
         var h = gridH;
         panel.layoutNode(idLabel, x, y, w, h);
 
@@ -86,18 +86,18 @@ public class InputForm extends CustomNode {
         w = 50;
         panel.layoutNode(idText, x, y, w, h);
 
-        x = (paddingLeft + gridW) - nameLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(nameLabel);
+        x = (paddingLeft + gridW) - w;
         y = idLabel.layoutY + gridH + vSpacing;
-        w = nameLabel.layoutBounds.width;
         panel.layoutNode(nameLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
         w = 150;
         panel.layoutNode(nameText, x, y, w, h);
 
-        x = (paddingLeft + gridW) - addressLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(addressLabel);
+        x = (paddingLeft + gridW) - w;
         y = nameLabel.layoutY + gridH + vSpacing;
-        w = addressLabel.layoutBounds.width;
         panel.layoutNode(addressLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
@@ -114,35 +114,35 @@ public class InputForm extends CustomNode {
         y = address3Text.layoutY + gridH + vSpacing;
         panel.layoutNode(address4Text, x, y, w, h);
 
-        x = (paddingLeft + gridW) - emailLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(emailLabel);
+        x = (paddingLeft + gridW) - w;
         y = address4Text.layoutY + gridH + vSpacing;
-        w = emailLabel.layoutBounds.width;
         panel.layoutNode(emailLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
         w = 120;
         panel.layoutNode(emailText, x, y, w, h);
 
-        x = (paddingLeft + gridW) - prefComnLabel.layoutBounds.width;
+        w = panel.getNodePrefWidth(prefComnLabel);
+        x = (paddingLeft + gridW) - w;
         y = emailLabel.layoutY + gridH + vSpacing;
-        w = prefComnLabel.layoutBounds.width;
         panel.layoutNode(prefComnLabel, x, y, w, h);
 
         x = paddingLeft + gridW + hSpacing;
-        w = smailRadio.layoutBounds.width;
+        w = panel.getNodePrefWidth(smailRadio);
         panel.layoutNode(smailRadio, x, y, w, h);
 
-        x = smailRadio.layoutX + smailRadio.layoutBounds.width + hSpacing;
-        w = emailRadio.layoutBounds.width;
+        x = smailRadio.layoutX + w + hSpacing;
+        w = panel.getNodePrefWidth(emailRadio);
         panel.layoutNode(emailRadio, x, y, w, h);
 
-        var buttonPanelWidth = (saveButton.width * 2) + hSpacing;
+        w = panel.getNodePrefWidth(cancelButton);
+        var buttonPanelWidth = (w * 2) + hSpacing;
         x = (scene.width - buttonPanelWidth)/2.0;
         y = emailRadio.layoutY + (gridH * 2);
-        w = saveButton.layoutBounds.width;
         panel.layoutNode(saveButton, x, y, w, h);
 
-        x = saveButton.layoutX + hSpacing + saveButton.layoutBounds.width;
+        x = saveButton.layoutX + hSpacing + w;
         panel.layoutNode(cancelButton, x, y, w, h);
     }
 }
