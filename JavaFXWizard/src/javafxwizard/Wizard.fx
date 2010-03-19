@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.util.Math;
+import javafx.scene.layout.LayoutInfo;
 
 /**
  * @author Rakesh Menon
@@ -64,9 +65,7 @@ public class Wizard extends Container {
     public-read def nextButton = Button {
         text: "Next >"
         action: function() {
-            if((selectedIndex + 1) < (sizeof panels)) {
-                selectedIndex++;
-            }
+            selectedIndex++;
         }
         disable: bind (selectedIndex >= ((sizeof panels) - 1))
     }
@@ -114,6 +113,8 @@ public class Wizard extends Container {
 
         for(panel in panels) {
             layoutNode(panel, 0, 0, width, height - outerBorder.height);
+            (panel.layoutInfo as LayoutInfo).width = width;
+            (panel.layoutInfo as LayoutInfo).height = (height - outerBorder.height);
         }
 
         var space = 10;

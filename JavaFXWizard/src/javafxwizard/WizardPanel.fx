@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
 import javafx.util.Math;
+import javafx.scene.layout.LayoutInfo;
 
 /**
  * @author Rakesh Menon
@@ -25,6 +26,8 @@ public class WizardPanel extends Container {
     public-init var title: String;
     public-init var text: String;
     public var wizard : Wizard;
+
+    override var layoutInfo = LayoutInfo { };
 
     def outerBorder = Rectangle {
         fill: Theme.outerBorderFill
