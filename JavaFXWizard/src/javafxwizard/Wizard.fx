@@ -36,6 +36,7 @@ public class Wizard extends Container {
     public-read var selectedIndex = -1 on replace {
         if((selectedIndex >= 0) and (selectedIndex < (sizeof panels))) {
             selectedPanel = panels[selectedIndex];
+            layoutNode(selectedPanel, 0, 0, width, height - outerBorder.height);
         }
     }
 
@@ -82,17 +83,12 @@ public class Wizard extends Container {
     }
 
     def buttons = [ backButton, cancelButton, nextButton ];
-    
-    def group = Group {
-        content: bind selectedPanel
-    }
 
-    init {
-        content = [
-            outerBorder, innerBorder, body,
-            group, buttons
-        ];
-    }
+    // bind with content, since value of selectedPanel will change
+    override var content = bind [
+        outerBorder, innerBorder, body,
+        selectedPanel, buttons
+    ];
     
     override function doLayout() : Void {
 
@@ -111,12 +107,8 @@ public class Wizard extends Container {
         body.width = width - 8;
         body.height = outerBorder.height - 8;
 
-        for(panel in panels) {
-            layoutNode(panel, 0, 0, width, height - outerBorder.height);
-            (panel.layoutInfo as LayoutInfo).width = width;
-            (panel.layoutInfo as LayoutInfo).height = (height - outerBorder.height);
-        }
-
+        layoutNode(selectedPanel, 0, 0, width, height - outerBorder.height);
+        
         var space = 10;
         var cancelSpace = 50;
 
