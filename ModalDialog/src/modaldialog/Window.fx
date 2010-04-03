@@ -6,12 +6,10 @@
 
 package modaldialog;
 
-import javafx.scene.CustomNode;
 import javafx.scene.Node;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.Group;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextOrigin;
@@ -28,26 +26,32 @@ import javafx.util.Math;
 import javafx.scene.Cursor;
 import javafx.scene.layout.Panel;
 import javafx.scene.Scene;
+import javafx.scene.layout.Container;
+import javafx.scene.Group;
 
 /**
  * @author Rakesh Menon
  */
 
-public class Window extends CustomNode {
+public class Window extends Container {
     
-    public-init var content : Node[];
+    public var nodes : Node[];
+
     public-init var fill: Paint = Color.GRAY;
+    public-init var onClose: function();
 
     public var title = "";
 
-    public var x = 0.0;
-    public var y = 0.0;
-    public var width = 180.0;
-    public var height = 180.0;
-    public var minWidth = 180.0;
-    public var minHeight = 180.0;
-    public-init var autoResize = false;
-    
+    /**
+     * Window X, Y, W, H
+     */
+    public var windowX = 0.0;
+    public var windowY = 0.0;
+    public var windowW = 200.0;
+    public var windowH = 150.0;
+    public var windowMinW = 100.0;
+    public var windowMinH = 100.0;
+
     def margin = 5;
     def arcSize = 8;
 
@@ -58,14 +62,10 @@ public class Window extends CustomNode {
         textOrigin: TextOrigin.TOP
     }
 
-    def contentClipRect = Rectangle {
-        x: 2
-        y: 2
-    }
-
-    def contentGroup = Group {
-        content: bind content
-        clip: contentClipRect
+    def contentPanel : Group = Group {
+        layoutX: 10
+        layoutY: 10
+        content: bind nodes
     }
     
     var startDragX = 0.0;
@@ -88,54 +88,28 @@ public class Window extends CustomNode {
         arcWidth: arcSize
         arcHeight: arcSize
 
-        onMouseMoved: function(e) {
-
-            if(autoResize) { return; }
-            
-            if(((width - e.x) < 10) and ((height - e.y) < 10)) {
-                dragDirection = 0;
-                bgRect.cursor = Cursor.SE_RESIZE;
-            } else if((width - e.x) < margin) {
-                dragDirection = 1;
-                bgRect.cursor = Cursor.H_RESIZE;
-            } else if((height - e.y) < margin) {
-                dragDirection = 2;
-                bgRect.cursor = Cursor.V_RESIZE;
-            } else {
-                dragDirection = -1;
-                bgRect.cursor = null;
-            }
-        }
-        
         onMousePressed: function(e) {
             toFront();
-            startDragX = x;
-            startDragY = y;
-            startDragW = width;
-            startDragH = height;            
+            startDragX = windowX;
+            startDragY = windowY;
+            startDragW = windowW;
+            startDragH = windowH;
         }
         
         onMouseDragged: function(e) {
 
-            if(not autoResize) {
-
-                if(dragDirection == 0) {
-                    width = Math.max(minWidth, startDragW + e.dragX);
-                    height = Math.max(minHeight, startDragH + e.dragY);
-                } else if(dragDirection == 1) {
-                    width = Math.max(minWidth, startDragW + e.dragX);
-                } else if(dragDirection == 2) {
-                    height = Math.max(minHeight, startDragH + e.dragY);
-                } else {
-                    x = startDragX + e.dragX;
-                    y = startDragY + e.dragY;
-                }
-                
+            if(dragDirection == 0) {
+                windowW = Math.max(windowMinW, startDragW + e.dragX);
+                windowH = Math.max(windowMinH, startDragH + e.dragY);
+            } else if(dragDirection == 1) {
+                windowW = Math.max(windowMinW, startDragW + e.dragX);
+            } else if(dragDirection == 2) {
+                windowH = Math.max(windowMinH, startDragH + e.dragY);
             } else {
-                x = startDragX + e.dragX;
-                y = startDragY + e.dragY;
+                windowX = startDragX + e.dragX;
+                windowY = startDragY + e.dragY;
             }
-
+                
             window.requestLayout();
         }
 
@@ -206,13 +180,13 @@ public class Window extends CustomNode {
         }
     }
 
-    def window = Panel {
-        layoutX: bind x
-        layoutY: bind y
+    def window : Panel = Panel {
+        layoutX: bind windowX
+        layoutY: bind windowY
         onLayout: onLayout
         content: [
             bgRect, contentOuterBorder, contentInnerBorder,
-            contentAreaBG, titleText, contentGroup,
+            contentAreaBG, titleText, contentPanel,
             closeButtonBorder, closeButtonBG, closeButton
         ]
         blocksMouse: true
@@ -221,46 +195,41 @@ public class Window extends CustomNode {
     /**
      * Handle Modality
      */
-    def eventQueueUtils = new EventQueueUtils();
-    var focusCycleRoot : FocusCycleRoot;
+    var focusCycleRoot = FocusCycleRoot {
+        content: bind nodes
+    }
 
-    override function create() : Node {
+    init {
 
         visible = false;
         blocksMouse = true;
 
-        focusCycleRoot = FocusCycleRoot {
-            content: content
-        };
-
-        Group {
-            content: [ mouseRect, window ]
-        };
+        content = [ mouseRect, window ];
     }
     
     function onLayout() : Void {
 
         var titleHeight = titleText.layoutBounds.height + margin + 3;
 
-        if(autoResize) {
-            width = Math.max(minWidth, contentGroup.layoutBounds.width + (margin + 2) * 2 + 30);
-            height = Math.max(minHeight, contentGroup.layoutBounds.height + (margin * 3) + titleHeight + 30);
-            contentGroup.clip = null;
-        } else {
-            contentClipRect.width = width - 4;
-            contentClipRect.height = height - 12;
-        }     
-        
+        contentPanel.requestLayout();
+
+        def contentMargin = 10;
+        def contentW = window.getNodePrefWidth(contentPanel) + (2 * contentMargin);
+        def contentH = window.getNodePrefHeight(contentPanel) + (2 * contentMargin);
+
+        windowW = Math.max(windowMinW, contentW + (margin * 2));
+        windowH = Math.max(windowMinH, contentH + (margin * 3) + titleHeight);
+
         titleText.layoutX = margin + 3;
         titleText.layoutY = margin + 3;
 
-        contentGroup.layoutY = titleHeight + margin;
-        contentGroup.layoutX = margin;
+        contentPanel.layoutY = titleHeight + margin + contentMargin;
+        contentPanel.layoutX = margin + contentMargin;
 
-        bgRect.width = width;
-        bgRect.height = height;
+        bgRect.width = windowW;
+        bgRect.height = windowH;
 
-        closeButton.layoutX = width - margin - closeButton.layoutBounds.width - 3;
+        closeButton.layoutX = windowW - margin - closeButton.layoutBounds.width - 3;
         closeButton.layoutY = (margin + titleHeight - closeButton.layoutBounds.height)/2.0;
 
         closeButtonBorder.layoutX = closeButton.layoutX - 3;
@@ -270,18 +239,18 @@ public class Window extends CustomNode {
 
         contentOuterBorder.layoutX = margin;
         contentOuterBorder.layoutY = margin + titleHeight;
-        contentOuterBorder.width = width - (margin * 2);
-        contentOuterBorder.height = height - titleHeight - (margin * 2);
+        contentOuterBorder.width = windowW - (margin * 2);
+        contentOuterBorder.height = windowH - titleHeight - (margin * 2);
 
         contentInnerBorder.layoutX = margin + 1;
         contentInnerBorder.layoutY = margin + titleHeight + 1;
-        contentInnerBorder.width = width - (margin * 2) - 2;
-        contentInnerBorder.height = height - titleHeight - (margin * 2) - 2;
+        contentInnerBorder.width = windowW - (margin * 2) - 2;
+        contentInnerBorder.height = windowH - titleHeight - (margin * 2) - 2;
         
         contentAreaBG.layoutX = margin + 2;
         contentAreaBG.layoutY = margin + titleHeight + 2;
-        contentAreaBG.width = width - (margin * 2) - 4;
-        contentAreaBG.height = height - titleHeight - (margin * 2) - 4;
+        contentAreaBG.width = windowW - (margin * 2) - 4;
+        contentAreaBG.height = windowH - titleHeight - (margin * 2) - 4;
     }
 
     public function show(mainScene : Scene) : Void {
@@ -289,17 +258,21 @@ public class Window extends CustomNode {
         if(visible) { return; }
 
         insert this into mainScene.content;
+        window.requestLayout();
         requestLayout();
+
+        windowX = (scene.width - windowW)/2.0;
+        windowY = (scene.height - windowH)/2.0;
+
         visible = true;
 
-        println("SHOW!: [{mainScene},{width},{height},{visible}]");
         focusCycleRoot.requestFocusOnDefault();
-        eventQueueUtils.blockEDT();
     }
 
     public function hide() : Void {
+        if(not visible) { return; }
         visible = false;
         delete this from scene.content;
-        eventQueueUtils.unblockEDT();
+        onClose();
     }
 }

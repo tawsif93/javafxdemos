@@ -10,55 +10,108 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.TextBox;
 import javafx.scene.control.Button;
-import javafx.scene.Group;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
- * @author javafx
+ * @author Rakesh Menon
  */
 
-def inputTextBox = TextBox { text: "Input" }
+//
+// Using Block EDT Approach
+//
+def showEDTButton : Button = Button {
+    
+    text: "Modal Dialog - Block EDT"
 
-def showButton : Button = Button {
-    layoutX: 100
-    layoutY: 100
-    text: "Show Modal Dialog"
     action: function() {
+
         println("Before Modal-Dialog Show!");
-        window.show(showButton.scene);
+
+        def userName = MessageBox.showInputDialog(
+            showEDTButton.scene, "What is your Name?",
+            "JavaFX - Input"
+        );
+
+        // OK Action Block
+        def selectedOption = MessageBox.showConfirmDialog(
+            showEDTButton.scene, "{userName}, do you like \"JavaFX\"?",
+            "JavaFX - Confirm", ["Yes", "No"]);
+
+        if("Yes".equals(selectedOption)) { // Yes Action Block
+            MessageBox.showMessageDialog(
+                showEDTButton.scene, "Cool! {userName} likes JavaFX!",
+                "JavaFX - Message");
+        } else { // No Action Block
+            MessageBox.showMessageDialog(
+                showEDTButton.scene, "Oh! No! {userName} don't like JavaFX!",
+                "JavaFX - Message");
+        }
+        
         println("After Modal-Dialog Show!");
-        println("User Entered: {inputTextBox.rawText}");
     }
 }
 
-def window : Window = Window {
-    title: "Modal Dialog"
-    content: Group {
-        content: HBox {
-            layoutX: 10
-            layoutY: 10
-            spacing: 10
-            content: [
-                inputTextBox,
-                Button {
-                    text: "OK"
-                    action: function() {
-                        window.hide();
-                    }
-                }
-            ]
+//
+// Using Function Branch Approach
+//
+def showBranchButton : Button = Button {
+
+    text: "Modal Dialog - No Block"
+
+    action: function() {
+
+        var userName : String = "";
+
+        // OK Action Block
+        def okAction = function(input : String) : Void {
+
+            userName = input;
+
+            MessageBox.showOptionsDialog(
+                showBranchButton.scene, "{userName}, do you like \"JavaFX\"?",
+                "JavaFX - Confirm", ["Yes", "No"],
+                [ yesAction, noAction ]);
+        };
+
+        MessageBox.showInputDialog(
+            showEDTButton.scene, "What is your Name?",
+            "JavaFX - Input", okAction
+        );
+
+        // Yes Action Block
+        def yesAction = function() {
+            MessageBox.showMessageDialog(
+                showBranchButton.scene, "Cool! {userName} likes JavaFX!",
+                "JavaFX - Message", null);
+        }
+
+        // No Action Block
+        def noAction = function() {
+            MessageBox.showMessageDialog(
+                showBranchButton.scene, "Oh! No! {userName} don't like JavaFX!",
+                "JavaFX - Message", null);
         }
     }
-    x: 50
-    y: 50
-    width: 200
-    height: 100
 }
 
 Stage {
+
+    title: "JavaFX Modal Dialog"
+
     scene: Scene {
+
         width: 300
-        height: 300
-        content: [ showButton ]
+        height: 200
+
+        content: VBox {
+            layoutX: 20
+            layoutY: 20
+            spacing: 10
+            content: [
+                TextBox { text: "JavaFX Modal Dialog" },
+                showEDTButton,
+                showBranchButton
+            ]
+        }
     }
 }

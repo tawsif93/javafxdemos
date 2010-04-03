@@ -19,22 +19,31 @@ import javafx.scene.input.KeyCode;
 
 public class FocusCycleRoot {
 
-    public-init var content : Node[];
+    public var content : Node[] on replace {
 
+        delete controls;
+
+        if(content != null) {
+            for(node in content) {
+                findControls(node);
+            }
+        }
+
+        focusIndex = 0;
+    }
+    
     var controls : Control[];
     var focusIndex = -1 on replace {
         controls[focusIndex].requestFocus();
     }
 
-    postinit {
-        for(node in content) {
-            findControls(node);
-        }
-    }
-
     function findControls(node : Node) : Void {
 
-        if(node instanceof Container) {
+        if((node instanceof Control) and node.focusTraversable) {
+            insert (node as Control) into controls;
+            node.focusTraversable = false;
+            node.onKeyPressed = onKeyPressed;
+        } else if(node instanceof Container) {
             var container = node as Container;
             for(c in container.content) {
                 findControls(c);
@@ -44,16 +53,16 @@ public class FocusCycleRoot {
             for(g in group.content) {
                 findControls(g);
             }
-        } else if(node.focusTraversable) {
-            if(node instanceof Control) {
-                insert (node as Control) into controls;
-                node.focusTraversable = false;
-                node.onKeyPressed = onKeyPressed;
-            }
         }
     }
     
     function onKeyPressed(ke : KeyEvent) : Void {
+
+        if((sizeof controls) == 1) {
+            controls[0].requestFocus();
+            return;
+        }
+        
         if(ke.code == KeyCode.VK_TAB) {
             if(ke.shiftDown) {
                 if(focusIndex > 0) {
