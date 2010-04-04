@@ -8,6 +8,7 @@ package modaldialog;
 import java.awt.AWTEvent;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.util.EmptyStackException;
 
 /**
  *
@@ -16,28 +17,34 @@ import java.awt.Toolkit;
 
 public class EventQueueUtils {
 
-    private final DialogEventQueue eventQueue =
-            new DialogEventQueue();
+    private static final DialogEventQueue eventQueue = new DialogEventQueue();
+
+    private EventQueue systemEventQueue;
     private boolean blocked = false;
+
+    public EventQueueUtils() {
+        systemEventQueue = Toolkit.getDefaultToolkit().getSystemEventQueue();
+    }
 
     /**
      * Push a new EventQueue and block current Thread
      */
     public void blockEDT() {
 
-        synchronized(this) {
+        if(blocked) { return; }
+        
+        systemEventQueue.push(eventQueue);
 
-            EventQueue systemEventQueue =
-                Toolkit.getDefaultToolkit().getSystemEventQueue();
-            systemEventQueue.push(eventQueue);
-            
-            try {
+        try {
+
+            synchronized(EventQueueUtils.this) {
                 blocked = true;
                 wait();
-            } catch (Exception e) {
-                blocked = false;
-                eventQueue.pop();
             }
+
+        } catch (Exception e) {
+            //e.printStackTrace();
+            blocked = false;
         }
     }
 
@@ -46,28 +53,40 @@ public class EventQueueUtils {
      */
     public void unblockEDT() {
 
-        synchronized(this) {
+        if(!blocked) { return; }
 
-            if(!blocked) { return; }
-            
-            try {
-                eventQueue.pop();
-                notifyAll();
-            } catch (Exception e) {
-                //e.printStackTrace();
+        synchronized (EventQueueUtils.this) {
+            notifyAll();
+        }
+        
+        Thread thread = new Thread() {
+
+            public void run() {
+
+                try {
+
+                    // Clear EventQueue!
+                    while (eventQueue.peekEvent() != null) {
+                        eventQueue.getNextEvent();
+                    }
+
+                    eventQueue.pop();
+                    blocked = false;
+
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                }
             }
-
-            blocked = false;
-        }
+        };
+        thread.start();
     }
+}
 
-    class DialogEventQueue extends EventQueue {
+class DialogEventQueue extends EventQueue {
 
-        public void pop() { super.pop(); }
-
-        protected void dispatchEvent(AWTEvent event) {
-            //System.out.println(event);
-            super.dispatchEvent(event);
-        }
+    public void pop() {
+        try {
+            super.pop();
+        } catch (EmptyStackException ese) { }
     }
 }

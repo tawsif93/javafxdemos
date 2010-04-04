@@ -80,10 +80,10 @@ public class MessageBox {
     }
 
     public function hide() : Void {
-        window.hide();
         if(blockEDT) {
             eventQueueUtils.unblockEDT();
         }
+        window.hide();
     }
 }
 
@@ -146,6 +146,9 @@ public function showInputDialog(
 
     def textBox : TextBox = TextBox {
         promptText: message
+        layoutInfo: LayoutInfo {
+            width: bind (label.width)
+        }
     }
 
     def vBox = VBox {
@@ -232,6 +235,9 @@ public function showInputDialog(
         action: function() {
             messageBox.hide();
             action(textBox.rawText);
+        }
+        layoutInfo: LayoutInfo {
+            width: bind (label.width)
         }
     }
 
