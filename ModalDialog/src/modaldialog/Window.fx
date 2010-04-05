@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextOrigin;
 import javafx.scene.text.FontWeight;
-import javafx.scene.effect.DropShadow;
+//import javafx.scene.effect.DropShadow;
 import javafx.scene.shape.HLineTo;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -117,7 +117,7 @@ public class Window extends Container {
             bgRect.cursor = null;
         }
         
-        effect: DropShadow { }
+        //effect: DropShadow { }
     }
 
     def closeButton : Path = Path {
