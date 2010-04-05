@@ -35,13 +35,12 @@ public class Carousel extends Container {
     var dragEndX = 0.0;
     var startX = 0.0;
 
-    def carousel = ClipView {
+    def carousel : ClipView = ClipView {
 
         layoutY: 20
         
         pannable: false
         node: hBox
-        width: width
         height: height - 40
         
         clipX: bind clipX
@@ -50,7 +49,9 @@ public class Carousel extends Container {
         }
         onMouseDragged: function(e) {
             dragEndX = startX + e.dragX;
-            if(dragEndX > 0) {
+            if(dragEndX > (hBox.layoutBounds.width - carousel.width)) {
+                dragEndX = hBox.layoutBounds.width - carousel.width;
+            } else if(dragEndX > 0) {
                 timeline.playFromStart();
             } else {
                 dragEndX = 0;
@@ -106,9 +107,13 @@ public class Carousel extends Container {
 
         rightArrow.height = height;
         leftArrow.height = height;
-        
-        rightArrow.layoutX = width - getNodePrefWidth(rightArrow);
-        carousel.layoutX = getNodePrefWidth(leftArrow);
+
+        def leftArrowW = getNodePrefWidth(leftArrow);
+        def rightArrowW = getNodePrefWidth(rightArrow);
+
+        rightArrow.layoutX = width - rightArrowW;
+        carousel.layoutX = leftArrowW;
+        carousel.width = width - leftArrowW - rightArrowW;
     }
     
     public function setInitialX(initX : Number) : Void {
