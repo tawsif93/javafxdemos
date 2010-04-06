@@ -76,6 +76,9 @@ public class Carousel extends Container {
         action: function() {
             startX = clipX;
             dragEndX = clipX + width;
+            if(dragEndX > (hBox.layoutBounds.width - carousel.width)) {
+                dragEndX = hBox.layoutBounds.width - carousel.width;
+            }
             timeline.playFromStart();
         }
     };
