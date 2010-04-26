@@ -39,9 +39,9 @@ var button : Button = Button {
     layoutX: 280
     layoutY: 220
     action: function() {
-        if (jFileChooser.showSaveDialog(Utilities.getContainer()) == JFileChooser.APPROVE_OPTION) {
+        if (jFileChooser.showSaveDialog(JavaFX13Utils.getContainer()) == JFileChooser.APPROVE_OPTION) {
             controlGroup.visible = false;
-            Utilities.saveAsImage(contentGroup, jFileChooser.getSelectedFile());
+            JavaFX13Utils.saveAsImage(contentGroup, jFileChooser.getSelectedFile());
             controlGroup.visible = true;
         }
     }
