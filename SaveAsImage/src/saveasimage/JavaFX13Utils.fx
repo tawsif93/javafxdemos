@@ -8,8 +8,6 @@ package saveasimage;
 
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.Group;
-import javafx.scene.layout.Panel;
 import javafx.scene.layout.Resizable;
 
 import java.awt.image.BufferedImage;
@@ -54,15 +52,6 @@ public function nodeToImage(
 
     var g2:Graphics2D;
 
-    if(node.parent != null) {
-        if(node.parent instanceof Group) {
-            delete node from (node.parent as Group).content;
-        } else if(node.parent instanceof Panel) {
-            delete node from (node.parent as Panel).content;
-        }
-    } else if (node.scene != null) {
-        delete node from node.scene.content;
-    }
     if(node instanceof Container) {
         (node as Resizable).width = bounds.width;
         (node as Resizable).height = bounds.height;
