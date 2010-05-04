@@ -17,7 +17,7 @@ and open the template in the editor.
 
     // Get value of "access_token" from URL
     var url = "" + window.location;
-    var index = url.indexOf('#') + 14;
+    var index = url.indexOf('access_token=') + 13;
     var accessToken = url.substring(index);
     
     javafx(
@@ -30,7 +30,8 @@ and open the template in the editor.
             name: "JavaFXFacebook"
         },
         {
-            access_token: accessToken
+            access_token: accessToken,
+            client_id: "113187112053972"
         }
     );
 

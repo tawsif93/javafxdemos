@@ -54,7 +54,7 @@ def userList : ListView = ListView {
  * Facebook API
  */
 def facebookUtils = FacebookUtils {
-    client_id: "113187112053972"
+    client_id: "{FX.getArgument("client_id")}"
     access_token: "{FX.getArgument("access_token")}"
 };
 
